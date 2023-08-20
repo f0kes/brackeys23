@@ -1,13 +1,14 @@
 ﻿using System;
-using GameState;
 using UnityEngine;
 
-namespace Character
+namespace Characters.Movement
 {
 	public class PlayerControlsProvider : MonoBehaviour, IControlsProvider
 	{
 		public event Action<Vector2> OnMove;
 		public event Action<Vector2> OnLookAt;
+		public event Action<int> OnChangeItem;
+		public event Action OnUseItem;
 
 		private void Update()
 		{
@@ -19,6 +20,25 @@ namespace Character
 			var mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
 			var lookAt = new Vector2(mousePositionInWorld.x, mousePositionInWorld.y);
 			OnLookAt?.Invoke(lookAt);
+
+			if(Input.GetKeyDown(KeyCode.Alpha1))
+			{
+				OnChangeItem?.Invoke(0);
+			}
+			if(Input.GetKeyDown(KeyCode.Alpha2))
+			{
+				OnChangeItem?.Invoke(1);
+			}
+			if(Input.GetKeyDown(KeyCode.Alpha3))
+			{
+				OnChangeItem?.Invoke(2);
+			}
+			//etc...
+
+			if(Input.GetKeyDown(KeyCode.Space))
+			{
+				OnUseItem?.Invoke();
+			}
 		}
 
 	}
