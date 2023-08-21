@@ -31,7 +31,7 @@ namespace Services.Pathfinding
 			var nextPosition = _tilemap.CellToWorld(new Vector3Int(nextNode.X, nextNode.Y, 0));
 			for(int i = 0; i < path.Count - 1; i++)
 			{
-				Debug.DrawLine(_tilemap.CellToWorld(new Vector3Int(path[i].X, path[i].Y, 0)), _tilemap.CellToWorld(new Vector3Int(path[i + 1].X, path[i + 1].Y, 0)), Color.red, 1f);
+				//Debug.DrawLine(_tilemap.CellToWorld(new Vector3Int(path[i].X, path[i].Y, 0)), _tilemap.CellToWorld(new Vector3Int(path[i + 1].X, path[i + 1].Y, 0)), Color.red, 1f);
 			}
 			return nextPosition;
 		}

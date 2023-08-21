@@ -9,11 +9,11 @@ namespace Services.Light
 	public class LightSource : MonoBehaviour, ILightSource
 	{
 		private Light2D _light2D;
-		private void Awake()
+		protected virtual void Awake()
 		{
 			_light2D = GetComponent<Light2D>();
 		}
-		private void Start()
+		protected virtual void Start()
 		{
 			GameManager.Instance.GetService<ILightService>().RegisterLightSource(this);
 		}
@@ -39,12 +39,24 @@ namespace Services.Light
 
 		public void SetFallOff(float fallOff)
 		{
-			
 		}
 
 		public void SetShimmer(float shimmer)
 		{
-			
+		}
+
+		public float GetIntensity()
+		{
+			return _light2D.intensity;
+		}
+
+		public Vector2 GetPosition()
+		{
+			return transform.position;
+		}
+		private void OnDestroy()
+		{
+			GameManager.Instance.GetService<ILightService>().UnregisterLightSource(this);
 		}
 	}
 }

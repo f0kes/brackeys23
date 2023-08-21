@@ -1,6 +1,7 @@
 ﻿using System;
 using Characters.Movement;
 using GameState;
+using Services.Light;
 using Services.Pathfinding;
 using UnityEngine;
 
@@ -19,16 +20,42 @@ namespace Characters.Enemy
 		private Vector2 _nextWaypoint;
 
 		private IPathFindingService _pathFindingService;
+		private ILightService _lightService;
 		private void Start()
 		{
 			var position = transform.position;
 			_finalTarget = position;
 			_nextWaypoint = position;
 			_pathFindingService = GameManager.Instance.GetService<IPathFindingService>();
+			_lightService = GameManager.Instance.GetService<ILightService>();
+		}
+		private Vector2 GetTarget()
+		{
+			var lightSources = _lightService.GetLightSources();
+			//we will sort both by intensity and distance, and choose that with the highest sum rank
+			float maxRank = float.MinValue;
+			var maxRankTarget = Vector2.zero;
+			foreach(var lightSource in lightSources)
+			{
+				var lightSourcePosition = lightSource.GetPosition();
+				var distance = Vector2.Distance(transform.position, lightSourcePosition);
+				var intensity = lightSource.GetIntensity();
+				var rank = intensity / distance;
+				if(rank > maxRank)
+				{
+					maxRank = rank;
+					maxRankTarget = lightSourcePosition;
+				}
+			}
+			return maxRankTarget;
 		}
 		private void Update()
 		{
-			_finalTarget = Player.Player.Instance.transform.position; //TODO: change target dynamically
+			_finalTarget = GetTarget();
+			if(_finalTarget == Vector2.zero)
+			{
+				return;
+			}
 			if(Vector2.Distance(transform.position, _nextWaypoint) < 100f)
 			{
 				_nextWaypoint = _pathFindingService.GetNextPosition(transform.position, _finalTarget);

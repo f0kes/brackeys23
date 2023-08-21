@@ -1,4 +1,6 @@
-﻿namespace Services.Light
+﻿using UnityEngine;
+
+namespace Services.Light
 {
 	public interface ILightSource
 	{
@@ -13,5 +15,9 @@
 		void SetFallOff(float fallOff);
 
 		void SetShimmer(float shimmer);
+
+		float GetIntensity();
+
+		Vector2 GetPosition();
 	}
 }
