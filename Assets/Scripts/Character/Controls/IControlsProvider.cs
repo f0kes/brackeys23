@@ -9,5 +9,6 @@ namespace Characters.Movement
 		public event Action<Vector2> OnLookAt;
 		public event Action<int> OnChangeItem;
 		public event Action OnUseItem;
+		public event Action OnAttack;
 	}
 }

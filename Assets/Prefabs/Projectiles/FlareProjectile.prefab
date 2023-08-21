@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2897724350571632562}
   - component: {fileID: 2897724350571632563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 2897724350749009483}
   - component: {fileID: 2897724350749009482}
   - component: {fileID: 4454923394528162028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FlareProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.23
 --- !u!1 &8199316064734246968
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7883346869459607723}
   - component: {fileID: 8985059178160030369}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light 2D (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

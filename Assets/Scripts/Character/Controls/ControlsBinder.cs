@@ -8,6 +8,7 @@
 			controlsProvider.OnLookAt += character.LookAt;
 			controlsProvider.OnChangeItem += character.ChangeItem;
 			controlsProvider.OnUseItem += character.UseItem;
+			controlsProvider.OnAttack += character.Attack;
 		}
 	}
 }
