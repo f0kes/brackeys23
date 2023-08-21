@@ -1,4 +1,6 @@
-﻿namespace Services.Light
+﻿using System.Collections.Generic;
+
+namespace Services.Light
 {
 	public interface ILightService
 	{
@@ -17,5 +19,6 @@
 		void SetGlobalInnerRadius(float innerRadius);
 
 		void SetGlobalOuterRadius(float outerRadius);
+		List<ILightSource> GetLightSources();
 	}
 }

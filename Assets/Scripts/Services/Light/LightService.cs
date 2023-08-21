@@ -64,5 +64,10 @@ namespace Services.Light
 				lightSource.SetOuterRadius(outerRadius);
 			}
 		}
+
+		public List<ILightSource> GetLightSources()
+		{
+			return _lightSources;
+		}
 	}
 }
