@@ -15,5 +15,7 @@ namespace Characters.Movement
 		void ChangeItem(int itemIndex);
 
 		void UseItem();
+
+		void Attack();
 	}
 }

@@ -4,28 +4,18 @@ using UnityEngine;
 
 namespace GameState
 {
-	public class GameManager : MonoBehaviour
+	public class GameManager
 	{
 		private Dictionary<Type, object> _services = new Dictionary<Type, object>();
 		public static GameManager Instance{get; private set;}
-		private void Awake()
+		public GameManager()
 		{
-			if(Instance == null)
+			if(Instance != null)
 			{
-				Instance = this;
-				DontDestroyOnLoad(gameObject);
+				Debug.LogError("Multiple instances of GameManager");
+				return;
 			}
-			else
-			{
-				Destroy(gameObject);
-			}
-		}
-		private void OnDestroy()
-		{
-			if(Instance == this)
-			{
-				Instance = null;
-			}
+			Instance = this;
 		}
 		public void RegisterService<T>(T service, bool overrideExisting = false)
 		{
@@ -43,6 +33,10 @@ namespace GameState
 			if(_services.ContainsKey(type)) return (T)_services[type];
 			Debug.LogError($"Service of type {type} not registered");
 			return default;
+		}
+		public void Dispose()
+		{
+			Instance = null;
 		}
 	}
 }

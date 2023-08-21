@@ -9,10 +9,16 @@ namespace Characters.Movement
 		public event Action<Vector2> OnLookAt;
 		public event Action<int> OnChangeItem;
 		public event Action OnUseItem;
+		public event Action OnAttack;
 
 		private void Update()
 		{
-			var move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			//var move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+			var right = Input.GetKey(KeyCode.D) ? 1 : 0;
+			var left = Input.GetKey(KeyCode.A) ? -1 : 0;
+			var up = Input.GetKey(KeyCode.W) ? 1 : 0;
+			var down = Input.GetKey(KeyCode.S) ? -1 : 0;
+			var move = new Vector2(right + left, up + down);
 			OnMove?.Invoke(move);
 
 			var mousePosition = Input.mousePosition;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Character.Items;
+using Characters.Items;
 
-namespace Character.Inventory
+namespace Characters.Inventories
 {
 	public class Inventory : IInventory
 	{

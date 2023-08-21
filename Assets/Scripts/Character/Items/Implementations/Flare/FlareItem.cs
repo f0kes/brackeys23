@@ -3,7 +3,7 @@ using GameState;
 using Services.Projectile;
 using UnityEngine;
 
-namespace Character.Items.Implementations.Flare
+namespace Characters.Items.Implementations.Flare
 {
 	public class FlareItem : MonoBehaviour, IItem, IProjectileHandler
 	{

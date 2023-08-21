@@ -1,6 +1,6 @@
 ﻿using Characters.Movement;
 
-namespace Character.Items
+namespace Characters.Items
 {
 	public interface IItem
 	{
