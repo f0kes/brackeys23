@@ -7,6 +7,8 @@ namespace Services.EnemySpawner
 {
 	public interface ICharacterSpawner
 	{
-		void SpawnCharacter(Character prefab, IControlsProvider controlsProvider, Vector2 position, Tilemap tilemap);
+		void SpawnCharacter(Character prefab, Vector2 position);
+
+		void SpawnCharacter(Character prefab, Vector2 position, float spawnRadius);
 	}
 }

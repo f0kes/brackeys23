@@ -4,6 +4,8 @@ using Characters.Inventories;
 using Characters.Items;
 using Characters.Items.Implementations.Flare;
 using Characters.Movement;
+using GameState;
+using Services.ItemUse;
 using UnityEngine;
 
 namespace Characters
@@ -19,6 +21,7 @@ namespace Characters
 
 		private IInventory _inventory;
 		private IItem _currentItem;
+		private IItemUseService _itemUseService;
 		private Vector2 _lookAtSpot;
 
 
@@ -33,9 +36,10 @@ namespace Characters
 		{
 			//TODO: remove this
 			_inventory = new Inventory(3);
-			_inventory.AddItem(_flareItem);
+			_inventory.AddItem(Instantiate(_flareItem));
 			_currentItem = _inventory.GetItem(0);
 			_timeSinceLastAttack = GetAttackSpeed();
+			_itemUseService = GameManager.Instance.GetService<IItemUseService>();
 		}
 		public void Move(Vector2 direction)
 		{
@@ -69,7 +73,7 @@ namespace Characters
 
 		public void UseItem()
 		{
-			_currentItem?.Use(this);
+			_itemUseService.UseItem(this, _currentItem);
 		}
 
 		//todo: move this to a separate class
@@ -121,7 +125,7 @@ namespace Characters
 
 		public float GetAttackRange()
 		{
-			return 1f;
+			return 2f;
 		}
 
 		public float GetAttackSpeed()

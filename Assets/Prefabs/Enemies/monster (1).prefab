@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3380859708373618155}
   - component: {fileID: 4598898359912551473}
   - component: {fileID: 2818116059106581481}
+  - component: {fileID: 3451191557493537672}
   m_Layer: 0
   m_Name: monster (1)
   m_TagString: Untagged
@@ -200,7 +201,7 @@ MonoBehaviour:
   - {x: 0.39902735, y: -0.37158227, z: 0}
   m_ShapePathHash: 2076868639
   m_Mesh: {fileID: 0}
-  m_InstanceId: 54888
+  m_InstanceId: 52854
 --- !u!61 &3380859708373618155
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -241,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 2818116059106581481}
   _speed: 2
+  _maxHealth: 0
   _flareItem: {fileID: 664162776488353456, guid: f6324242db6f6a54883d834c66cb411a, type: 3}
 --- !u!50 &2818116059106581481
 Rigidbody2D:
@@ -263,3 +265,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3451191557493537672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3380859708373618152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574b77f5452248dd9ea0fbcb308eb004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Linq;
+using Services.Map;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 namespace Pathfinding
 {
-	public class TilemapToNodeGrid
+	public class TilemapToNodeGrid : IMapGenerator
 	{
 		private Tilemap _colliderTilemap;
+		private Astar.Node[,] _grid;
 
 		public TilemapToNodeGrid(Tilemap tilemap)
 		{
 			_colliderTilemap = tilemap;
 			_colliderTilemap.CompressBounds();
+			_grid = GenerateGrid();
 		}
 		public Astar.Node[,] GenerateGrid()
 		{
@@ -32,7 +37,29 @@ namespace Pathfinding
 					}
 				}
 			}
+			_grid = grid;
 			return grid;
+		}
+
+		public Astar.Node[,] GetGrid()
+		{
+			return _grid;
+		}
+
+		public Astar.Node GetNodeAtPosition(Vector2 position)
+		{
+			var gridPosition = CastToTilemapPosition(position);
+			return _grid.Cast<Astar.Node>().FirstOrDefault(node => node.X == gridPosition.x && node.Y == gridPosition.y);
+		}
+
+		public Vector2Int CastToTilemapPosition(Vector2 position)
+		{
+			return (Vector2Int)_colliderTilemap.WorldToCell(position);
+		}
+
+		public Vector2 CastToWorldPosition(Vector2Int position)
+		{
+			return _colliderTilemap.CellToWorld((Vector3Int)position);
 		}
 	}
 }

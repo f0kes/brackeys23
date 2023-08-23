@@ -3,9 +3,14 @@ using Characters.Movement;
 using Characters;
 using Characters.Enemy;
 using Misc;
+using Pathfinding;
+using Progression;
 using Services.EnemySpawner;
+using Services.ItemUse;
 using Services.Light;
+using Services.Map;
 using Services.Pathfinding;
+using Services.ProgressionService;
 using Services.Projectile;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +27,7 @@ namespace GameState
 
 		[SerializeField] private Tilemap _walkableTilemap;
 		[SerializeField] private Tilemap _colliderTilemap;
+		[SerializeField] private LightProgression _lightProgression;
 		private void Awake()
 		{
 			var gameManager = new GameManager();
@@ -29,12 +35,22 @@ namespace GameState
 
 			gameManager.RegisterService<IControlsBinder>(new ControlsBinder());
 			gameManager.RegisterService<IProjectileService>(new ProjectileService());
-			gameManager.RegisterService<ILightService>(new LightService());
-			gameManager.RegisterService<IPathFindingService>(new PathFindingService(_colliderTilemap));
+			var lightService = new LightService();
+			gameManager.RegisterService<ILightService>(lightService);
+			lightService.SetAmbientLightIntensity(_lightProgression.MaxBrightness);
+
+			var mapGenerator = new TilemapToNodeGrid(_colliderTilemap);
+			gameManager.RegisterService<IPathFindingService>(new PathFindingService(mapGenerator));
+			gameManager.RegisterService<IMapService>(new MapService(mapGenerator));
+
 			gameManager.RegisterService<ICharacterSpawner>(new CharacterSpawnerService());
+			gameManager.RegisterService<IProgressionService>(new ProgressionService(_lightProgression, lightService));
+
+
+			var itemUseService = ItemUseServiceFactory.Create();
+			gameManager.RegisterService(itemUseService);
 
 			BindPlayerController(gameManager);
-			SpawnEnemies();
 		}
 		private void BindPlayerController(GameManager gameManager)
 		{

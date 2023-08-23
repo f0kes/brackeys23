@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9662af910a1241a2ae7d2e34f7380dc6, type: 3}
+  m_Name: Flare
+  m_EditorClassIdentifier: 
+  Cooldown: 3
+  SpawnTimer: 1
+  SpawnRadius: 2
+  SpawnPoint: {x: 0, y: 0}
+  MonsterProgressions:
+  - KeyPoint: 0
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}

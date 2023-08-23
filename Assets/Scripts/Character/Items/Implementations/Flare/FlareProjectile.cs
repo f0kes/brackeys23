@@ -7,8 +7,6 @@ namespace Characters.Items.Implementations.Flare
 	public class FlareProjectile : Projectile
 	{
 		private float _currentVelocity;
-		
-
 		public override void Launch(ProjectileData data)
 		{
 			base.Launch(data);

@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Services.Projectile
 {
-	[RequireComponent(typeof(Rigidbody2D))]
 	public class Projectile : MonoBehaviour, IProjectile
 	{
 		public event Action<IProjectile> OnProjectileHit;
@@ -12,14 +12,17 @@ namespace Services.Projectile
 		protected float DistanceTravelled;
 
 		protected ProjectileData Data;
-		protected Rigidbody2D Rigidbody;
+		[FormerlySerializedAs("Rb")]
+		[SerializeField] protected Rigidbody2D Rigidbody;
 
 		protected float CurrentLifetime;
 
-		private void Awake()
+
+		public Vector2 GetPosition()
 		{
-			Rigidbody = GetComponent<Rigidbody2D>();
+			return transform.position;
 		}
+
 		public virtual void Launch(ProjectileData data)
 		{
 			Data = data;
