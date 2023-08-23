@@ -9,13 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9662af910a1241a2ae7d2e34f7380dc6, type: 3}
+  m_Script: {fileID: 11500000, guid: f07b991ba53e4812ac450439ce540fac, type: 3}
   m_Name: Flare
   m_EditorClassIdentifier: 
   Cooldown: 3
   SpawnTimer: 1
-  SpawnRadius: 2
+  SpawnRadius: 10
   SpawnPoint: {x: 0, y: 0}
   MonsterProgressions:
   - KeyPoint: 0
     MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
+  - KeyPoint: 1
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+  - KeyPoint: 2
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 3
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+  - KeyPoint: 4
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 5
+    MonsterPreset: {fileID: 11400000, guid: 4ca69d539fb3c4546b4eb50e575850cf, type: 2}

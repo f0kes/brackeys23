@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using Misc;
 using Services.Light;
 using UnityEngine;
@@ -28,6 +28,10 @@ namespace Characters.Player
 			while (time < _blinkDuration)
 			{
 				var blend = Tween.EaseOutSine(time / _blinkDuration);
+				if(blend < 0.01f)
+				{
+					blend = 0;
+				}
 				SetIntensity(Mathf.Lerp(_blinkIntensity, _baseIntensity, blend));
 				//SetOuterRadius(Mathf.Lerp(_blinkIntensity, 0, blend));
 				time += Time.deltaTime;

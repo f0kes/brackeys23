@@ -39,7 +39,7 @@ namespace GameState
 			gameManager.RegisterService<ILightService>(lightService);
 			lightService.SetAmbientLightIntensity(_lightProgression.MaxBrightness);
 
-			var mapGenerator = new TilemapToNodeGrid(_colliderTilemap);
+			var mapGenerator = new TilemapToNodeGrid(_colliderTilemap, _walkableTilemap);
 			gameManager.RegisterService<IPathFindingService>(new PathFindingService(mapGenerator));
 			gameManager.RegisterService<IMapService>(new MapService(mapGenerator));
 

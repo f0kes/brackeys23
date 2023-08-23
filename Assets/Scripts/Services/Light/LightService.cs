@@ -7,6 +7,7 @@ namespace Services.Light
 	{
 		private List<ILightSource> _lightSources = new List<ILightSource>();
 		private ILightSource _ambientLightSource;
+		private float _ambientLightIntensity = 0.5f;
 
 		public void RegisterLightSource(ILightSource lightSource)
 		{
@@ -16,6 +17,7 @@ namespace Services.Light
 		public void RegisterAmbientLightSource(ILightSource ambientLightSource)
 		{
 			_ambientLightSource = ambientLightSource;
+			_ambientLightSource.SetIntensity(_ambientLightIntensity);
 		}
 
 		public void UnregisterLightSource(ILightSource lightSource)
@@ -83,7 +85,8 @@ namespace Services.Light
 
 		public void SetAmbientLightIntensity(float intensity)
 		{
-			_ambientLightSource.SetIntensity(intensity);
+			_ambientLightIntensity = intensity;
+			_ambientLightSource?.SetIntensity(intensity);
 		}
 
 		public float GetAmbientLightIntensity()
