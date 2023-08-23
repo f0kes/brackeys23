@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ead6497465496eb453b7b5af456e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flareProjectile: {fileID: 2897724350749009482, guid: 7a6727dbd57c3614dbebaad2cb137582, type: 3}
+  _itemData: {fileID: 11400000, guid: e19dfb1f08a464c44a7ffbd10a88352b, type: 2}
+  _flareProjectile: {fileID: 6876460279004516044, guid: 7a6727dbd57c3614dbebaad2cb137582, type: 3}
   _flareRange: 1000
   _flareSpeed: 5
-  _flareLifetime: 3
+  _flareLifetime: 1000

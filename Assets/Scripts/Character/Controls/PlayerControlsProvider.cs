@@ -40,11 +40,10 @@ namespace Characters.Movement
 				OnChangeItem?.Invoke(2);
 			}
 			//etc...
-
-			if(Input.GetKeyDown(KeyCode.Space))
+			if(Input.GetMouseButtonUp(0))
 			{
 				OnUseItem?.Invoke();
-			}
+			} 
 		}
 
 	}

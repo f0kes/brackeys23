@@ -5,15 +5,16 @@ using UnityEngine;
 
 namespace Characters.Items.Implementations.Flare
 {
-	public class FlareItem : MonoBehaviour, IItem, IProjectileHandler
+	public class FlareItem : Item, IProjectileHandler
 	{
 		[SerializeReference] private Projectile _flareProjectile;
 		[SerializeField] private float _flareRange;
 		[SerializeField] private float _flareSpeed;
 		[SerializeField] private float _flareLifetime;
-
-		public void Use(ICharacter user)
+		private Vector2 _flarePosition;
+		public override void Use(ICharacter user)
 		{
+			base.Use(user);
 			var gameManager = GameManager.Instance;
 			var projectileService = gameManager.GetService<IProjectileService>();
 			var direction = (user.GetLookSpot() - user.GetPosition()).normalized;
@@ -26,12 +27,18 @@ namespace Characters.Items.Implementations.Flare
 			}, this);
 		}
 
+		public override Vector2 GetAnchor(ICharacter user)
+		{
+			return _flarePosition;
+		}
+
 		public void OnProjectileHit(IProjectile projectile)
 		{
 		}
 
 		public void OnProjectileTick(IProjectile projectile)
 		{
+			_flarePosition = projectile.GetPosition();
 		}
 	}
 

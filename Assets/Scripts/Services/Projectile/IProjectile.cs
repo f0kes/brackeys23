@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Services.Projectile
 {
@@ -6,6 +7,8 @@ namespace Services.Projectile
 	{
 		public event Action<IProjectile> OnProjectileHit;
 		public event Action<IProjectile> OnProjectileTick;
+		
+		Vector2 GetPosition();
 		
 		void Launch(ProjectileData data);
 		void Destroy();

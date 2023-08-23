@@ -1,28 +1,36 @@
 ﻿using System;
+using System.Linq;
+using Services.Map;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 namespace Pathfinding
 {
-	public class TilemapToNodeGrid
+	public class TilemapToNodeGrid : IMapGenerator
 	{
-		private Tilemap _colliderTilemap;
+		private Tilemap _colliderCollider;
+		private Tilemap _walkableCollider;
+		private Astar.Node[,] _grid;
 
-		public TilemapToNodeGrid(Tilemap tilemap)
+		public TilemapToNodeGrid(Tilemap collider, Tilemap walkable)
 		{
-			_colliderTilemap = tilemap;
-			_colliderTilemap.CompressBounds();
+			_colliderCollider = collider;
+			_walkableCollider = walkable;
+			_colliderCollider.CompressBounds();
+			_walkableCollider.CompressBounds();
+			_grid = GenerateGrid();
 		}
 		public Astar.Node[,] GenerateGrid()
 		{
-			var size = _colliderTilemap.size;
+			var size = _colliderCollider.size;
 			var grid = new Astar.Node[size.x, size.y];
-			var bounds = _colliderTilemap.cellBounds;
+			var bounds = _colliderCollider.cellBounds;
 			for(int x = bounds.xMin, i = 0; i < (bounds.size.x); x++, i++)
 			{
 				for(int y = bounds.yMin, j = 0; j < (bounds.size.y); y++, j++)
 				{
-					if(_colliderTilemap.HasTile(new Vector3Int(x, y, 0)))
+					if(_colliderCollider.HasTile(new Vector3Int(x, y, 0)) || !_walkableCollider.HasTile(new Vector3Int(x, y, 0)))
 					{
 						grid[i, j] = new Astar.Node(x, y, false);
 					}
@@ -32,7 +40,29 @@ namespace Pathfinding
 					}
 				}
 			}
+			_grid = grid;
 			return grid;
+		}
+
+		public Astar.Node[,] GetGrid()
+		{
+			return _grid;
+		}
+
+		public Astar.Node GetNodeAtPosition(Vector2 position)
+		{
+			var gridPosition = CastToTilemapPosition(position);
+			return _grid.Cast<Astar.Node>().FirstOrDefault(node => node.X == gridPosition.x && node.Y == gridPosition.y);
+		}
+
+		public Vector2Int CastToTilemapPosition(Vector2 position)
+		{
+			return (Vector2Int)_colliderCollider.WorldToCell(position);
+		}
+
+		public Vector2 CastToWorldPosition(Vector2Int position)
+		{
+			return _colliderCollider.CellToWorld((Vector3Int)position);
 		}
 	}
 }

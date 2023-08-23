@@ -66,7 +66,6 @@ namespace UI
 				_toActivate.RemoveFirst();
 				ActivateHPSegment(segment);
 				_toDeactivate.AddLast(segment);
-				yield return new WaitForSeconds(_animationDelay);
 			}
 		}
 
@@ -87,7 +86,6 @@ namespace UI
 				_toDeactivate.RemoveLast();
 				DeactivateHPSegment(segment);
 				_toActivate.AddFirst(segment);
-				yield return new WaitForSeconds(_animationDelay);
 			}
 		}
 

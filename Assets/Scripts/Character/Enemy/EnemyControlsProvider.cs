@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Characters.Movement;
 using GameState;
 using Services.Light;
@@ -32,6 +34,9 @@ namespace Characters.Enemy
 		private Vector2 GetTarget()
 		{
 			var lightSources = _lightService.GetLightSources();
+			//var temp = lightSources.OfType<IDamagable>().Cast<ILightSource>().ToList();
+			//lightSources = temp;
+
 			//we will sort both by intensity and distance, and choose that with the highest sum rank
 			float maxRank = float.MinValue;
 			var maxRankTarget = Vector2.zero;
@@ -41,27 +46,27 @@ namespace Characters.Enemy
 				var distance = Vector2.Distance(transform.position, lightSourcePosition);
 				var intensity = lightSource.GetIntensity();
 				var rank = intensity / distance;
-				if(rank > maxRank)
-				{
-					maxRank = rank;
-					maxRankTarget = lightSourcePosition;
-				}
+				if(!(rank > maxRank)) continue;
+				maxRank = rank;
+				maxRankTarget = lightSourcePosition;
 			}
 			return maxRankTarget;
 		}
 		private void Update()
 		{
 			_finalTarget = GetTarget();
+			OnLookAt?.Invoke(_finalTarget);
+
 			if(_finalTarget == Vector2.zero)
 			{
 				return;
 			}
+
 			if(Vector2.Distance(transform.position, _nextWaypoint) < 100f)
 			{
 				_nextWaypoint = _pathFindingService.GetNextPosition(transform.position, _finalTarget);
 			}
 			OnMove?.Invoke(_nextWaypoint - (Vector2)transform.position);
-			OnLookAt?.Invoke(_finalTarget);
 			OnAttack?.Invoke();
 		}
 	}
