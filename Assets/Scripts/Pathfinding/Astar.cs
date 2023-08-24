@@ -13,17 +13,23 @@ namespace Pathfinding
 			public readonly int Y;
 			public int G;
 			public int H;
+			public int Penalty;
 			public Node Parent;
 			public List<Node> Neighbors = new List<Node>();
 			public readonly bool IsWalkable;
-			public Node(int x, int y, bool isWalkable = true)
+			public Node(int x, int y, bool isWalkable = true, int penalty = 0)
 			{
 				X = x;
 				Y = y;
-
+				Penalty = penalty;
 				IsWalkable = isWalkable;
 			}
 			public void AddNeighbors(Node[,] grid, int x, int y)
+			{
+				AddOrthogonalNeighbors(grid, x, y);
+				AddDiagonalNeighbors(grid, x, y);
+			}
+			private void AddOrthogonalNeighbors(Node[,] grid, int x, int y)
 			{
 				if(x > 0)
 				{
@@ -41,6 +47,9 @@ namespace Pathfinding
 				{
 					Neighbors.Add(grid[x, y + 1]);
 				}
+			}
+			private void AddDiagonalNeighbors(Node[,] grid, int x, int y)
+			{
 				if(x > 0 && y > 0)
 				{
 					Neighbors.Add(grid[x - 1, y - 1]);
@@ -107,7 +116,7 @@ namespace Pathfinding
 					{
 						continue;
 					}
-					var tentativeG = currentNode.G + GetDistance(currentNode, neighbor);
+					var tentativeG = currentNode.G + GetDistance(currentNode, neighbor) + neighbor.Penalty;
 					if(tentativeG < neighbor.G || !openList.Contains(neighbor))
 					{
 						neighbor.G = tentativeG;

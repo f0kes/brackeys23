@@ -17,5 +17,14 @@ namespace Characters.Movement
 		void UseItem();
 
 		void Attack();
+
+		void StartRunning();
+
+		void StopRunning();
+
+		void SetDefaultSpeed(float speed);
+
+		void SetRunningSpeed(float speed);
+
 	}
 }

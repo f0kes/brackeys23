@@ -10,6 +10,8 @@ namespace Characters.Movement
 		public event Action<int> OnChangeItem;
 		public event Action OnUseItem;
 		public event Action OnAttack;
+		public event Action OnStartRunning;
+		public event Action OnStopRunning;
 
 		private void Update()
 		{
@@ -42,8 +44,22 @@ namespace Characters.Movement
 			//etc...
 			if(Input.GetMouseButtonUp(0))
 			{
+				OnChangeItem?.Invoke(0);
 				OnUseItem?.Invoke();
-			} 
+			}
+			if(Input.GetMouseButtonUp(1))
+			{
+				OnChangeItem?.Invoke(1);
+				OnUseItem?.Invoke();
+			}
+			if(Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				OnStartRunning?.Invoke();
+			}
+			if(Input.GetKeyUp(KeyCode.LeftShift))
+			{
+				OnStopRunning?.Invoke();
+			}
 		}
 
 	}

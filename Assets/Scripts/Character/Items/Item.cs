@@ -31,7 +31,7 @@ namespace Characters.Items
 			return _cooldownTimer <= 0;
 		}
 
-		public void Update()
+		public virtual void Update()
 		{
 			_cooldownTimer -= Time.deltaTime;
 		}

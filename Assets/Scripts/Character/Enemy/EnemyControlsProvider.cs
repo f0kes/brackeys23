@@ -17,6 +17,8 @@ namespace Characters.Enemy
 		public event Action<int> OnChangeItem;
 		public event Action OnUseItem;
 		public event Action OnAttack;
+		public event Action OnStartRunning;
+		public event Action OnStopRunning;
 
 		private Vector2 _finalTarget;
 		private Vector2 _nextWaypoint;

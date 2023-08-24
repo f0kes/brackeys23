@@ -9,6 +9,8 @@
 			controlsProvider.OnChangeItem += character.ChangeItem;
 			controlsProvider.OnUseItem += character.UseItem;
 			controlsProvider.OnAttack += character.Attack;
+			controlsProvider.OnStartRunning += character.StartRunning;
+			controlsProvider.OnStopRunning += character.StopRunning;
 		}
 	}
 }

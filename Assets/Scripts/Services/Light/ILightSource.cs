@@ -19,5 +19,7 @@ namespace Services.Light
 		float GetIntensity();
 
 		Vector2 GetPosition();
+
+		Vector2 SetPosition(Vector2 position);
 	}
 }

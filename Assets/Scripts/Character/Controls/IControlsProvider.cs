@@ -10,5 +10,7 @@ namespace Characters.Movement
 		public event Action<int> OnChangeItem;
 		public event Action OnUseItem;
 		public event Action OnAttack;
+		public event Action OnStartRunning;
+		public event Action OnStopRunning;
 	}
 }

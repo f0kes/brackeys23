@@ -54,6 +54,13 @@ namespace Services.Light
 		{
 			return transform.position;
 		}
+
+		public Vector2 SetPosition(Vector2 position)
+		{
+			transform.position = position;
+			return position;
+		}
+
 		private void OnDestroy()
 		{
 			GameManager.Instance.GetService<ILightService>().UnregisterLightSource(this);

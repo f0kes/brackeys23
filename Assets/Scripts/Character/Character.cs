@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Characters.Inventories;
 using Characters.Items;
 using Characters.Items.Implementations.Flare;
+using Characters.Items.Implementations.JellyFish;
 using Characters.Movement;
 using GameState;
 using Services.ItemUse;
@@ -15,15 +16,19 @@ namespace Characters
 		public event Action<int> OnHealthChanged;
 
 		[SerializeField] private Rigidbody2D _rigidbody2D;
-		[SerializeField] private float _speed;
-		[SerializeField] private int _maxHealth;
+		[SerializeField] protected float _speed;
+		[SerializeField] protected int _maxHealth;
 		[SerializeField] private FlareItem _flareItem; //TODO: remove this
+		[SerializeField] private JellyFishItem _jellyFishItem; //TODO: remove this
 
 		private IInventory _inventory;
 		private IItem _currentItem;
 		private IItemUseService _itemUseService;
 		private Vector2 _lookAtSpot;
-
+		protected float _runningSpeed;
+		protected float _currentSpeed;
+		protected float AccelerationTime;
+		protected float AccelerationCooldown;
 
 		private int _health;
 
@@ -37,14 +42,16 @@ namespace Characters
 			//TODO: remove this
 			_inventory = new Inventory(3);
 			_inventory.AddItem(Instantiate(_flareItem));
+			_inventory.AddItem(Instantiate(_jellyFishItem));
 			_currentItem = _inventory.GetItem(0);
 			_timeSinceLastAttack = GetAttackSpeed();
 			_itemUseService = GameManager.Instance.GetService<IItemUseService>();
+			_currentSpeed = _speed;
 		}
 		public void Move(Vector2 direction)
 		{
 			direction = direction.normalized;
-			_rigidbody2D.velocity = direction * _speed;
+			_rigidbody2D.velocity = direction * _currentSpeed;
 		}
 
 		public Vector2 GetPosition()
@@ -92,6 +99,26 @@ namespace Characters
 				if(damagable != null && damagable.GetTeamId() != GetTeamId())
 					damagable.TakeDamage(GetDamage());
 			}
+		}
+
+		public virtual void StartRunning()
+		{
+			_currentSpeed = _runningSpeed;
+		}
+
+		public virtual void StopRunning()
+		{
+			_currentSpeed = _speed;
+		}
+
+		public virtual void SetDefaultSpeed(float speed)
+		{
+			_speed = speed;
+		}
+
+		public virtual void SetRunningSpeed(float speed)
+		{
+			_runningSpeed = speed;
 		}
 
 

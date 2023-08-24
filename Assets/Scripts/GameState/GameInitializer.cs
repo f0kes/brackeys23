@@ -2,6 +2,7 @@
 using Characters.Movement;
 using Characters;
 using Characters.Enemy;
+using Characters.Player;
 using Misc;
 using Pathfinding;
 using Progression;
@@ -28,6 +29,7 @@ namespace GameState
 		[SerializeField] private Tilemap _walkableTilemap;
 		[SerializeField] private Tilemap _colliderTilemap;
 		[SerializeField] private LightProgression _lightProgression;
+		
 		private void Awake()
 		{
 			var gameManager = new GameManager();
@@ -39,7 +41,7 @@ namespace GameState
 			gameManager.RegisterService<ILightService>(lightService);
 			lightService.SetAmbientLightIntensity(_lightProgression.MaxBrightness);
 
-			var mapGenerator = new TilemapToNodeGrid(_colliderTilemap, _walkableTilemap);
+			var mapGenerator = new TilemapToNodeGrid(_colliderTilemap, _walkableTilemap, 1);
 			gameManager.RegisterService<IPathFindingService>(new PathFindingService(mapGenerator));
 			gameManager.RegisterService<IMapService>(new MapService(mapGenerator));
 
