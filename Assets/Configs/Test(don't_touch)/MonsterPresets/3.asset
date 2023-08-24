@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   MonsterCounts:
-  - Monster: {fileID: 4598898359912551473, guid: 4446c25a2da43a34281fe1b50df741be, type: 3}
+  - Monster: {fileID: 2506369199456371846, guid: 4446c25a2da43a34281fe1b50df741be, type: 3}
     Count: 4

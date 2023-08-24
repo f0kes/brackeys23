@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Characters.Movement;
 using GameState;
 using Services.Light;
 using Services.Pathfinding;
 using UnityEngine;
 
-namespace Characters.Enemy
+namespace Characters.Enemy.Centipede
 {
-	public class EnemyControlsProvider : MonoBehaviour, IControlsProvider
+	[RequireComponent(typeof(Character))]
+	public class CentipedeControlsProvider : MonoBehaviour, IControlsProvider //TODO: Remove code duplication with EnemyControlsProvider
 	{
-
 		public event Action<Vector2> OnMove;
 		public event Action<Vector2> OnLookAt;
 		public event Action<int> OnChangeItem;
@@ -20,11 +18,14 @@ namespace Characters.Enemy
 		public event Action OnStartRunning;
 		public event Action OnStopRunning;
 
+		[SerializeField] private float _rotationSpeed;
+		private Vector2 _lookDirection = Vector2.up;
 		protected Vector2 FinalTarget;
 		protected Vector2 NextWaypoint;
 
 		protected IPathFindingService PathFindingService;
 		protected ILightService LightService;
+		private IControlsBinder _controlsBinder;
 		private void Start()
 		{
 			var position = transform.position;
@@ -32,6 +33,8 @@ namespace Characters.Enemy
 			NextWaypoint = position;
 			PathFindingService = GameManager.Instance.GetService<IPathFindingService>();
 			LightService = GameManager.Instance.GetService<ILightService>();
+			_controlsBinder = GameManager.Instance.GetService<IControlsBinder>();
+			_controlsBinder.Bind(this, GetComponent<Character>()); //todo: do something with this
 		}
 		protected virtual Vector2 GetTarget()
 		{
@@ -57,7 +60,7 @@ namespace Characters.Enemy
 		protected virtual void Update()
 		{
 			FinalTarget = GetTarget();
-			OnLookAt?.Invoke(FinalTarget);
+
 
 			if(FinalTarget == Vector2.zero)
 			{
@@ -68,7 +71,10 @@ namespace Characters.Enemy
 			{
 				NextWaypoint = PathFindingService.GetNextPosition(transform.position, FinalTarget);
 			}
-			OnMove?.Invoke(NextWaypoint - (Vector2)transform.position);
+
+			_lookDirection = Vector3.RotateTowards(_lookDirection, NextWaypoint - (Vector2)transform.position, _rotationSpeed * Time.deltaTime, 0f);
+			OnLookAt?.Invoke(_lookDirection);
+			OnMove?.Invoke(_lookDirection);
 			OnAttack?.Invoke();
 		}
 	}

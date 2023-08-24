@@ -9,7 +9,7 @@ namespace Characters.Enemy
 		protected override void Start()
 		{
 			base.Start();
-			Destroy(gameObject, _lifeTime);
+			if(_lifeTime > 0) Destroy(gameObject, _lifeTime);
 		}
 	}
 }
