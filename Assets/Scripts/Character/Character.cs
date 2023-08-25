@@ -145,6 +145,13 @@ namespace Characters
 			if(_health <= 0)
 				Die();
 		}
+		public void Heal(int amount)
+		{
+			_health += amount;
+			if(_health > _maxHealth)
+				_health = _maxHealth;
+			OnHealthChanged?.Invoke(_health);
+		}
 
 		public virtual void Die()
 		{

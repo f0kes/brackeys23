@@ -47,6 +47,7 @@ namespace Characters.Player
 				RemoveSlow();
 			}
 		}
+		
 		public void SetSlow(float percentage, float time)
 		{
 			_speed /= (1 - _slow);
