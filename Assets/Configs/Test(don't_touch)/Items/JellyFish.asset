@@ -19,3 +19,13 @@ MonoBehaviour:
   MonsterProgressions:
   - KeyPoint: 0
     MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+  - KeyPoint: 1
+    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+  - KeyPoint: 2
+    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+  - KeyPoint: 3
+    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+  - KeyPoint: 4
+    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+  - KeyPoint: 5
+    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}

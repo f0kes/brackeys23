@@ -20,6 +20,9 @@ namespace Characters.Enemy
 		public event Action OnStartRunning;
 		public event Action OnStopRunning;
 
+		[SerializeField] private float _aggroRange;
+		[SerializeField] private float _minAggroLightIntensity = 0.2f;
+
 		protected Vector2 FinalTarget;
 		protected Vector2 NextWaypoint;
 
@@ -36,17 +39,15 @@ namespace Characters.Enemy
 		protected virtual Vector2 GetTarget()
 		{
 			var lightSources = LightService.GetLightSources();
-			//var temp = lightSources.OfType<IDamagable>().Cast<ILightSource>().ToList();
-			//lightSources = temp;
-
-			//we will sort both by intensity and distance, and choose that with the highest sum rank
 			float maxRank = float.MinValue;
 			var maxRankTarget = Vector2.zero;
 			foreach(var lightSource in lightSources)
 			{
 				var lightSourcePosition = lightSource.GetPosition();
 				var distance = Vector2.Distance(transform.position, lightSourcePosition);
+				if(distance > _aggroRange) continue;
 				var intensity = lightSource.GetIntensity();
+				if(intensity < _minAggroLightIntensity) continue;
 				var rank = intensity / distance;
 				if(!(rank > maxRank)) continue;
 				maxRank = rank;

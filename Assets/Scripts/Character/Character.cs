@@ -82,12 +82,15 @@ namespace Characters
 		{
 			_itemUseService.UseItem(this, _currentItem);
 		}
+		public virtual void Update()
+		{
+			_timeSinceLastAttack += Time.deltaTime;
+		}
 
 		//todo: move this to a separate class
 		public virtual void Attack()
 		{
-			_timeSinceLastAttack += Time.deltaTime;
-			if(!(_timeSinceLastAttack >= GetAttackSpeed())) return;
+			if(!CanAttack()) return;
 			_timeSinceLastAttack = 0f;
 
 			var results = new Collider2D[10];
@@ -96,9 +99,17 @@ namespace Characters
 			for(var i = 0; i < size; i++)
 			{
 				var damagable = results[i].GetComponent<IDamagable>();
-				if(damagable != null && damagable.GetTeamId() != GetTeamId())
-					damagable.TakeDamage(GetDamage());
+				ProcessDamage(damagable);
 			}
+		}
+		protected virtual void ProcessDamage(IDamagable damagable)
+		{
+			if(damagable != null && damagable.GetTeamId() != GetTeamId())
+				damagable.TakeDamage(GetDamage());
+		}
+		private bool CanAttack()
+		{
+			return _timeSinceLastAttack >= GetAttackSpeed();
 		}
 
 		public virtual void StartRunning()
@@ -145,17 +156,17 @@ namespace Characters
 			return 1;
 		}
 
-		public int GetDamage()
+		public virtual int GetDamage()
 		{
 			return 1;
 		}
 
-		public float GetAttackRange()
+		public virtual float GetAttackRange()
 		{
 			return 2f;
 		}
 
-		public float GetAttackSpeed()
+		public virtual float GetAttackSpeed()
 		{
 			return 1f;
 		}
