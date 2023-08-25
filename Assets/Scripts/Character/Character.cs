@@ -20,6 +20,7 @@ namespace Characters
 		[SerializeField] protected int _maxHealth;
 		[SerializeField] private FlareItem _flareItem; //TODO: remove this
 		[SerializeField] private JellyFishItem _jellyFishItem; //TODO: remove this
+		[SerializeField] private AudioSource audioSource;
 
 		private IInventory _inventory;
 		private IItem _currentItem;
@@ -29,6 +30,7 @@ namespace Characters
 		protected float _currentSpeed;
 		protected float AccelerationTime;
 		protected float AccelerationCooldown;
+		protected bool IsMoving;
 
 		private int _health;
 
@@ -52,6 +54,7 @@ namespace Characters
 		{
 			direction = direction.normalized;
 			_rigidbody2D.velocity = direction * _currentSpeed;
+			IsMoving = direction != Vector2.zero;
 		}
 
 		public Vector2 GetPosition()
@@ -119,6 +122,11 @@ namespace Characters
 		public virtual void SetRunningSpeed(float speed)
 		{
 			_runningSpeed = speed;
+		}
+
+		public AudioSource GetAudioSource()
+		{
+			return audioSource;
 		}
 
 

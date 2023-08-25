@@ -56,3 +56,4 @@ MonoBehaviour:
   _deactivationTime: 1
   _lampColor: {r: 1, g: 1, b: 1, a: 1}
   _lampIntensity: 1
+  audioClip: {fileID: 8300000, guid: 31ed1ec20967f1c4792fbe946f1387fe, type: 3}
