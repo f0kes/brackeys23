@@ -9,6 +9,7 @@ namespace Services.Projectile
 		public Vector2 StartPosition{get; set;}
 		public float Range{get; set;}
 		public float Lifetime{get; set;}
+		public int Damage { get; set; }
 
 	}
 }
