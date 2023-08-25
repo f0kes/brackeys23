@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Services.Light
 {
 	public class LightService : ILightService
 	{
+		public event Action<Vector2> OnLightEvent;
 		private List<ILightSource> _lightSources = new List<ILightSource>();
 		private ILightSource _ambientLightSource;
 		private float _ambientLightIntensity = 0.5f;
+
 
 		public void RegisterLightSource(ILightSource lightSource)
 		{
@@ -76,6 +79,11 @@ namespace Services.Light
 			{
 				lightSource.SetOuterRadius(outerRadius);
 			}
+		}
+
+		public void ExecuteLightEvent(Vector2 position)
+		{
+			OnLightEvent?.Invoke(position);
 		}
 
 		public List<ILightSource> GetLightSources()

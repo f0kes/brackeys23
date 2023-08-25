@@ -17,6 +17,8 @@ namespace Services.Projectile
 
 		protected float CurrentLifetime;
 
+		protected bool _launched = false;
+
 
 		public Vector2 GetPosition()
 		{
@@ -26,6 +28,7 @@ namespace Services.Projectile
 		public virtual void Launch(ProjectileData data)
 		{
 			Data = data;
+			_launched = true;
 		}
 
 		public virtual void Destroy()
@@ -33,6 +36,10 @@ namespace Services.Projectile
 		}
 		private void FixedUpdate()
 		{
+			if (!_launched)
+			{
+				return;
+			}
 			OnProjectileTick?.Invoke(this);
 			Move();
 			CurrentLifetime += Time.fixedDeltaTime;

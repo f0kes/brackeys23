@@ -4,6 +4,7 @@ using System.Linq;
 using Characters.Movement;
 using GameState;
 using Services.EnemySpawner;
+using Services.Light;
 using Services.ProgressionService;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace Characters.Items
 		{
 			_cooldownTimer = _itemData.Cooldown;
 			StartCoroutine(SpawnEnemies(user));
+			GameManager.Instance.GetService<ILightService>().ExecuteLightEvent(user.GetPosition());
 		}
 		public virtual Vector2 GetAnchor(ICharacter user)
 		{
