@@ -19,6 +19,8 @@ namespace Characters.Player
 		private bool _isRunning;
 		private float _runTimer;
 		private float _runCooldownTimer;
+		private float _slow;
+		private float _slowTimer;
 
 		protected override void Awake()
 		{
@@ -33,13 +35,37 @@ namespace Characters.Player
 			base.Start();
 			_lastStepPosition = transform.position;
 		}
-		private void Update()
+		public override void Update()
 		{
 			HandleRunning();
 			if(!((_lastStepPosition - (Vector2)transform.position).magnitude >= _stepLength)) return;
 			_lastStepPosition = transform.position;
 			_lightSource.Blink();
+			_slowTimer -= Time.deltaTime;
+			if(_slowTimer <= 0)
+			{
+				RemoveSlow();
+			}
 		}
+		public void SetSlow(float percentage, float time)
+		{
+			_speed /= (1 - _slow);
+			_runningSpeed /= (1 - _slow);
+
+			_slow = percentage;
+
+			_speed *= (1 - _slow);
+			_runningSpeed *= (1 - _slow);
+
+			_slowTimer = time;
+		}
+		public void RemoveSlow()
+		{
+			_speed /= (1 - _slow);
+			_runningSpeed /= (1 - _slow);
+			_slow = 0;
+		}
+
 		private void HandleRunning()
 		{
 			if(_isRunning)

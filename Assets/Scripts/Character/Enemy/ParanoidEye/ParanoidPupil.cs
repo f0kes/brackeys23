@@ -1,26 +1,28 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Characters.Enemy
 {
-    public class ParanoidPupil : MonoBehaviour
-    {
-        [SerializeField] private float shiftDistance;
-        
-        public Vector2 startPosition;
-        
-        
+	public class ParanoidPupil : MonoBehaviour
+	{
+		[SerializeField] private float shiftDistance;
+		[SerializeField] private float _zOffset;
 
-        private void Start()
-        {
-            startPosition = transform.position;
-        }
+		public Vector2 startPosition;
 
-        private void Update()
-        {
-            var target = Characters.Player.Player.Instance.GetPosition();
-            transform.position = startPosition + (target - startPosition).normalized * shiftDistance;
-        }
-    }
+
+
+		private void Start()
+		{
+			startPosition = transform.position;
+		}
+
+		private void Update()
+		{
+			var target = Characters.Player.Player.Instance.GetPosition();
+			Vector3 position = startPosition + (target - startPosition).normalized * shiftDistance;
+			position = new Vector3(position.x, position.y, _zOffset);
+			transform.position = position;
+		}
+	}
 }
