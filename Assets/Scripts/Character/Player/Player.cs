@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Services.Light;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -18,6 +19,8 @@ namespace Characters.Player
 		[SerializeField] private AudioClip[] stepAudioClips;
 		[SerializeField] private float walkStepDelay;
 		[SerializeField] private float runStepDelay;
+		
+		[SerializeField] private PlayerAnimationBehaviour animate;
 		private Vector2 _lastStepPosition;
 
 		private bool _canRun = true;
@@ -33,6 +36,7 @@ namespace Characters.Player
 			SetPlayerData(Instantiate(_playerData));
 			base.Awake();
 			StartCoroutine(HandleStepSounds());
+			animate.playIdleAnimation();
 		}
 		protected override void Start()
 		{
@@ -64,6 +68,27 @@ namespace Characters.Player
 				{
 					_canRun = true;
 				}
+			}
+		}
+
+		public override void Move(Vector2 direction)
+		{
+			base.Move(direction);
+			animate.SendLegsDirection(direction);
+			if (IsMoving)
+			{
+				if (_isRunning)
+				{
+					animate.playRunAnimation();
+				}
+				else
+				{
+					animate.playWalkAnimation();
+				}
+			}
+			else
+			{
+				animate.playIdleAnimation();
 			}
 		}
 
