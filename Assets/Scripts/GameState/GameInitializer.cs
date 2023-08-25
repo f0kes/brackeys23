@@ -10,6 +10,7 @@ using Services.EnemySpawner;
 using Services.ItemUse;
 using Services.Light;
 using Services.Map;
+using Services.MemoryDisplay;
 using Services.Pathfinding;
 using Services.ProgressionService;
 using Services.Projectile;
@@ -21,6 +22,8 @@ namespace GameState
 {
 	public class GameInitializer : MonoBehaviour
 	{
+		public static event Action OnGameInitialized;
+
 		[SerializeField] private Character playerCharacter;
 		[SerializeField] private Character enemyCharacter;
 		[SerializeField] private int enemyCount;
@@ -29,7 +32,7 @@ namespace GameState
 		[SerializeField] private Tilemap _walkableTilemap;
 		[SerializeField] private Tilemap _colliderTilemap;
 		[SerializeField] private LightProgression _lightProgression;
-		
+
 		private void Awake()
 		{
 			var gameManager = new GameManager();
@@ -53,6 +56,7 @@ namespace GameState
 			gameManager.RegisterService(itemUseService);
 
 			BindPlayerController(gameManager);
+			OnGameInitialized?.Invoke();
 		}
 		private void BindPlayerController(GameManager gameManager)
 		{

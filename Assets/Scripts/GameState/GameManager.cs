@@ -17,7 +17,7 @@ namespace GameState
 			}
 			Instance = this;
 		}
-		public void RegisterService<T>(T service, bool overrideExisting = false)
+		public void RegisterService<T>(T service, bool overrideExisting = false) //should be a static method
 		{
 			var type = typeof(T);
 			if(_services.ContainsKey(type) && !overrideExisting)
