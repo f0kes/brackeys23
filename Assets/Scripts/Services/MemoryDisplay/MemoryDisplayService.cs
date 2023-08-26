@@ -61,9 +61,10 @@ namespace Services.MemoryDisplay
 			StartCoroutine(ReturnControl());
 			OnHide?.Invoke();
 		}
-		
+
 		public void Hide()
 		{
+			_memoryDisplay.SetActive(false);
 			OnHide?.Invoke();
 		}
 
