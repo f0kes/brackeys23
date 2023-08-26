@@ -37,6 +37,15 @@ namespace Services.MemoryDisplay
 			_audioSource.clip = audioClip;
 			_audioSource.Play();
 		}
+
+		public void PassHideAction(Action hideAction)
+		{
+			_hideButton.onClick.AddListener(() =>
+			{
+				hideAction?.Invoke();
+			});
+		}
+
 		public void Hide()
 		{
 			StartCoroutine(ReturnControl());

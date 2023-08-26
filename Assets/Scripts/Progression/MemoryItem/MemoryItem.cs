@@ -38,15 +38,15 @@ namespace Progression.MemoryItem
 			var distance = Vector2.Distance(transform.position, player.transform.position);
 			if(!(distance < _activationRange)) return;
 			if(!Input.GetKeyDown(KeyCode.Space)) return;
-			_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
+			//_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
 			player.Heal(_healAmount);
 			_memoryDisplayService.DisplayMemory(_memoryText, _memorySound);
+			_memoryDisplayService.PassHideAction(() => { _progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1); });
 			_progressionService.OnKeyPointChanged -= OnKeyPointChanged;
 			Destroy(gameObject);
 		}
 		private void OnDestroy()
 		{
-			
 		}
 
 	}

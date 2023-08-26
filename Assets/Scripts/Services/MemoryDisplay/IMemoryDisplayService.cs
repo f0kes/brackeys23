@@ -6,5 +6,7 @@ namespace Services.MemoryDisplay
 	{
 		void DisplayMemory(string memory, AudioClip audioClip);
 
+		void PassHideAction(System.Action hideAction);
+
 	}
 }
