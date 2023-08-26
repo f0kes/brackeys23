@@ -23,6 +23,7 @@ namespace Progression.MemoryItem
 			_memoryDisplayService = GameManager.Instance.GetService<IMemoryDisplayService>();
 			if(_progressionService.GetKeyPoint() != _memoryId) gameObject.SetActive(false);
 			_progressionService.OnKeyPointChanged += OnKeyPointChanged;
+			_progressionService.RegisterKeyPoint(_memoryId);
 		}
 
 		private void OnKeyPointChanged(int obj)

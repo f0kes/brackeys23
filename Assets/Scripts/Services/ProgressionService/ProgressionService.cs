@@ -29,5 +29,10 @@ namespace Services.ProgressionService
 			_lightService.SetAmbientLightIntensity(_lightService.GetAmbientLightIntensity() - diff * _lightProgression.DeltaBrightness);
 			OnKeyPointChanged?.Invoke(_keyPoint);
 		}
+
+		public void AddLight()
+		{
+			_lightService.SetAmbientLightIntensity(_lightService.GetAmbientLightIntensity() + _lightProgression.DeltaBrightness);
+		}
 	}
 }
