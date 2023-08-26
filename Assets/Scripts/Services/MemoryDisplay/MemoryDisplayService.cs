@@ -16,11 +16,11 @@ namespace Services.MemoryDisplay
 		private void Awake()
 		{
 			_hideButton.onClick.AddListener(Hide);
-			GameInitializer.OnGameInitialized += RegisterService;
+			//GameInitializer.OnGameInitialized += RegisterService;
 		}
 		private void RegisterService()
 		{
-			GameManager.Instance.RegisterService<IMemoryDisplayService>(this);
+			GameManager.Instance.RegisterService<IMemoryDisplayService>(this, true);
 			GameInitializer.OnGameInitialized -= RegisterService;
 		}
 		private void Start()

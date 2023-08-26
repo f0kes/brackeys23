@@ -29,7 +29,7 @@ namespace Characters.Movement
 			var lookAt = new Vector2(mousePositionInWorld.x, mousePositionInWorld.y);
 			OnLookAt?.Invoke(lookAt);
 
-			if(Input.GetKeyDown(KeyCode.Alpha1))
+			/*if(Input.GetKeyDown(KeyCode.Alpha1))
 			{
 				OnChangeItem?.Invoke(0);
 			}
@@ -40,7 +40,7 @@ namespace Characters.Movement
 			if(Input.GetKeyDown(KeyCode.Alpha3))
 			{
 				OnChangeItem?.Invoke(2);
-			}
+			}*/
 			//etc...
 			if(Input.GetMouseButtonUp(0))
 			{

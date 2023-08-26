@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aggroRange: 15
+  _minAggroLightIntensity: 0.2
 --- !u!114 &2506369199456371846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,4 +280,5 @@ MonoBehaviour:
   _maxHealth: 0
   _flareItem: {fileID: 664162776488353456, guid: f6324242db6f6a54883d834c66cb411a, type: 3}
   _jellyFishItem: {fileID: 8574295637840307639, guid: 6a5356d93ed61904eb2919e7c8954fbc, type: 3}
-  _lifeTime: 3
+  audioSource: {fileID: 0}
+  _lifeTime: 10

@@ -32,6 +32,7 @@ namespace GameState
 		[SerializeField] private Tilemap _walkableTilemap;
 		[SerializeField] private Tilemap _colliderTilemap;
 		[SerializeField] private LightProgression _lightProgression;
+		[SerializeField] private MemoryDisplayService _memoryDisplayService;
 
 		private void Awake()
 		{
@@ -50,6 +51,7 @@ namespace GameState
 
 			gameManager.RegisterService<ICharacterSpawner>(new CharacterSpawnerService());
 			gameManager.RegisterService<IProgressionService>(new ProgressionService(_lightProgression, lightService));
+			gameManager.RegisterService<IMemoryDisplayService>(_memoryDisplayService);
 
 
 			var itemUseService = ItemUseServiceFactory.Create();
