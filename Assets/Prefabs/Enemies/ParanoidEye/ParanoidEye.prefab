@@ -481,7 +481,7 @@ MonoBehaviour:
   - {x: 0.27934623, y: -0.84397364, z: 0}
   m_ShapePathHash: 877811735
   m_Mesh: {fileID: 0}
-  m_InstanceId: 70426
+  m_InstanceId: 86970
 --- !u!61 &9031653832318015432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -607,7 +607,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 2.4037163
-  MaxDistance: 8
+  MaxDistance: 14.64
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -619,15 +619,15 @@ AudioSource:
     - serializedVersion: 3
       time: 0.30046454
       value: 1
-      inSlope: -3.3295057
-      outSlope: -3.3295057
+      inSlope: -0.6896467
+      outSlope: -0.6896467
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.41349092
     - serializedVersion: 3
-      time: 0.49138623
-      value: 0.33461
+      time: 0.66614515
+      value: 0.53460693
       inSlope: -0.8323764
       outSlope: -0.8323764
       tangentMode: 0
