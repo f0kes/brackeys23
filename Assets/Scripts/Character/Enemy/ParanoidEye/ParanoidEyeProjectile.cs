@@ -12,27 +12,30 @@ namespace Characters.Enemy
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(Data.Velocity.y, Data.Velocity.x) * Mathf.Rad2Deg);
             _launched = true;
         }
-        
 
-        protected override void Move()
+
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            base.Move();
+            col.gameObject.TryGetComponent(out ParanoidEyeBehaviour eye);
+            if (eye != null)
+            {
+                return;
+            }
             if (_damageTaken)
             {
                 return;
             }
-            var results = new Collider2D[10];
-            var size = Physics2D.OverlapCircleNonAlloc(Rigidbody.position, 0.22f, results);
-
-            for (var i = 0; i < size; i++)
+            
+            col.gameObject.TryGetComponent(out Player.Player player);
+            if (player != null)
             {
-                var damagable = results[i].GetComponent<Player.Player>();
-                if (damagable != null)
-                {
-                    damagable.TakeDamage(Data.Damage);
-                    _damageTaken = true;
-                }
+                player.TakeDamage(Data.Damage);
             }
+            Rigidbody.velocity = Vector2.zero;
+            Destroy(this.gameObject, 1f);
+            _launched = false;
+            _damageTaken = true;
+            
         }
     }
 }
