@@ -64,8 +64,8 @@ namespace Characters.Enemy
 			{
 				return;
 			}
-
-			if(Vector2.Distance(transform.position, NextWaypoint) < 100f)
+			var atTarget = Vector2.Distance(transform.position, FinalTarget) < 1f;
+			if((Vector2.Distance(transform.position, NextWaypoint) < 1f || NextWaypoint == Vector2.zero) && !atTarget)
 			{
 				NextWaypoint = PathFindingService.GetNextPosition(transform.position, FinalTarget);
 			}
