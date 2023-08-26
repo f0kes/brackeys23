@@ -17,7 +17,7 @@ namespace Progression
 		private void OnTriggerEnter2D(Collider2D col)
 		{
 			if(col.gameObject.GetComponent<Player>() == null) return;
-			_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
+			_progressionService.AddLight();
 			Destroy(gameObject);
 		}
 	}

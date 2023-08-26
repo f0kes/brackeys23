@@ -13,5 +13,7 @@ namespace Services.ProgressionService
 
 		void RegisterKeyPoint(int keyPoint);
 
+		void AddLight();
+
 	}
 }
