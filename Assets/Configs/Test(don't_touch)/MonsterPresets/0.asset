@@ -12,6 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb407dc60f8e4dbabcc0f8fc17845ee3, type: 3}
   m_Name: 0
   m_EditorClassIdentifier: 
-  MonsterCounts:
-  - Monster: {fileID: 2506369199456371846, guid: 4446c25a2da43a34281fe1b50df741be, type: 3}
-    Count: 1
+  MonsterCounts: []

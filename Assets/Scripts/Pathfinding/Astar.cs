@@ -79,10 +79,11 @@ namespace Pathfinding
 				for(var j = 0; j < _grid.GetLength(1); j++)
 				{
 					_grid[i, j].AddNeighbors(_grid, i, j);
+					_nodeDictionary.Add(new Vector2Int(_grid[i, j].X, _grid[i, j].Y), _grid[i, j]);
 				}
 			}
 		}
-		public List<Node> GetPath(Vector2Int start, Vector2Int end)
+		public List<Node> GetPath(Vector2Int start, Vector2Int end, int maxIterations = 1000000)
 		{
 			var openList = new List<Node>();
 			var closedList = new List<Node>();
@@ -91,13 +92,17 @@ namespace Pathfinding
 			var endNode = FindNodeWithPosition(end);
 			if(startNode == null || endNode == null)
 			{
-				Debug.Log(start.x + " " + start.y + " " + end.x + " " + end.y);
 				return null;
+			}
+			if(startNode == endNode)
+			{
+				return new List<Node> { startNode };
 			}
 
 			openList.Add(startNode);
-			while (openList.Count > 0)
+			while (openList.Count > 0 && maxIterations > 0)
 			{
+				maxIterations--;
 				var currentNode = openList[0];
 				for(int i = 1; i < openList.Count; i++)
 				{
@@ -106,8 +111,9 @@ namespace Pathfinding
 						currentNode = openList[i];
 					}
 				}
-				openList.Remove(currentNode);
+				openList.Remove(currentNode); //use a heap instead
 				closedList.Add(currentNode);
+				
 				if(currentNode == endNode)
 				{
 					return GetFinalPath(startNode, endNode);
@@ -141,7 +147,6 @@ namespace Pathfinding
 			}
 			var node = _grid.Cast<Node>().FirstOrDefault(node => node.X == position.x && node.Y == position.y);
 			if(node == null) return null;
-
 			_nodeDictionary.Add(position, node);
 			return node;
 		}
