@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using Characters.Movement;
 using GameState;
 using TMPro;
 using UnityEngine;
@@ -29,6 +31,7 @@ namespace Services.MemoryDisplay
 		}
 		public void DisplayMemory(string memory, AudioClip audioClip)
 		{
+			PlayerControlsProvider.Instance.DisableControls();
 			_memoryDisplay.SetActive(true);
 			_memoryText.text = memory;
 			_audioSource.clip = audioClip;
@@ -45,7 +48,14 @@ namespace Services.MemoryDisplay
 
 		public void Hide()
 		{
+			StartCoroutine(ReturnControl());
+		}
+
+		private IEnumerator ReturnControl()
+		{
+			yield return null;
 			_memoryDisplay.SetActive(false);
+			PlayerControlsProvider.Instance.EnableControls();
 		}
 	}
 }
