@@ -136,9 +136,14 @@ namespace Characters.Enemy.Centipede
 				FinalTarget = _defaultPosition;
 			}
 
-			UpdatePath(false);
+			if(!_aggro) UpdatePath(false);
 			var position = transform.position;
-			_lookDirection = Vector3.RotateTowards(_lookDirection, NextWaypoint - (Vector2)position, _rotationSpeed * Time.deltaTime, 0f);
+			var target = NextWaypoint - (Vector2)position;
+			if(_aggro)
+			{
+				target = Player.Player.Instance.GetPosition();
+			}
+			_lookDirection = Vector3.RotateTowards(_lookDirection, target, _rotationSpeed * Time.deltaTime, 0f);
 			OnLookAt?.Invoke(((Vector2)position + _lookDirection));
 			OnMove?.Invoke(_lookDirection);
 			OnAttack?.Invoke();
