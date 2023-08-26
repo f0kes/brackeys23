@@ -4,6 +4,7 @@ using Characters.Movement;
 using GameState;
 using Pathfinding;
 using Services.Light;
+using Services.Map;
 using Services.Pathfinding;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace Characters.Enemy.Centipede
 
 		protected IPathFindingService PathFindingService;
 		protected ILightService LightService;
+		private IMapService _mapService;
 		private IControlsBinder _controlsBinder;
 		private Func<Vector2> _targetFunc;
 
@@ -43,6 +45,10 @@ namespace Characters.Enemy.Centipede
 		private bool _aggro;
 		private float _aggroTimer;
 		private float _timeSinceLastPathUpdate = 0f;
+
+
+		private Vector2 _lastRandomPosition;
+		private bool _isRandomPositionSet;
 		private void Awake()
 		{
 			_targetFunc = GetClosestLight;
@@ -55,6 +61,7 @@ namespace Characters.Enemy.Centipede
 			PathFindingService = GameManager.Instance.GetService<IPathFindingService>();
 			LightService = GameManager.Instance.GetService<ILightService>();
 			_controlsBinder = GameManager.Instance.GetService<IControlsBinder>();
+			_mapService = GameManager.Instance.GetService<IMapService>();
 			_controlsBinder.Bind(this, GetComponent<Character>()); //todo: do something with this
 			LightService.OnLightEvent += OnLight;
 			_timeSinceLastPathUpdate = PathFindingService.GetPathRequestTimeOffset() % _timeBetweenPathUpdates;
@@ -133,7 +140,7 @@ namespace Characters.Enemy.Centipede
 			FinalTarget = GetClosestLight();
 			if(FinalTarget == Vector2.zero)
 			{
-				FinalTarget = _defaultPosition;
+				FinalTarget = GetRandomPosition();
 			}
 
 			if(!_aggro) UpdatePath(false);
@@ -143,10 +150,27 @@ namespace Characters.Enemy.Centipede
 			{
 				target = Player.Player.Instance.GetPosition();
 			}
-			_lookDirection = Vector3.RotateTowards(_lookDirection, target, _rotationSpeed * Time.deltaTime, 0f);
+			bool rotateRight = Vector3.Cross(_lookDirection, target).z < 0;
+			Vector2 rotatedVector = rotateRight ? new Vector2(_lookDirection.y, -_lookDirection.x) : new Vector2(-_lookDirection.y, _lookDirection.x);
+			_lookDirection = Vector3.RotateTowards(_lookDirection, rotatedVector, _rotationSpeed * Time.deltaTime, 0f);
+
+
 			OnLookAt?.Invoke(((Vector2)position + _lookDirection));
-			OnMove?.Invoke(_lookDirection);
+			OnMove?.Invoke(NextWaypoint - (Vector2)transform.position);
 			OnAttack?.Invoke();
+		}
+		private Vector2 GetRandomPosition()
+		{
+			if(AtTarget())
+			{
+				_isRandomPositionSet = false;
+			}
+			if(!_isRandomPositionSet)
+			{
+				_isRandomPositionSet = true;
+				_lastRandomPosition = _mapService.GetRandomEmptyTile();
+			}
+			return _lastRandomPosition;
 		}
 		protected virtual void UpdatePath(bool checkTarget = true)
 		{
@@ -167,6 +191,10 @@ namespace Characters.Enemy.Centipede
 				NextWaypoint = PathFindingService.GetNextPosition(Path, CurrentNodeIndex);
 				CurrentNodeIndex++;
 			}
+		}
+		private bool AtTarget()
+		{
+			return Vector2.Distance(transform.position, FinalTarget) < 1f;
 		}
 	}
 }

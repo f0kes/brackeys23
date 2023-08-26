@@ -16,7 +16,6 @@ namespace Characters.Enemy.Centipede
 		[SerializeField] private float _aggroTime;
 		[SerializeField] private float _slowTime;
 		[SerializeField] private float _slowPercent;
-		[SerializeField] private float _attackRange = 1f;
 		[SerializeField] private float _minLightAggroIntensity = 0.2f;
 
 		private Vector2 _defaultPosition;
@@ -51,11 +50,7 @@ namespace Characters.Enemy.Centipede
 				player.SetSlow(_slowPercent, _slowTime);
 			}
 		}
-
-		public override float GetAttackRange()
-		{
-			return _attackRange;
-		}
+		
 
 	}
 }

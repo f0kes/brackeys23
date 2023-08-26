@@ -33,8 +33,8 @@ namespace Services.Pathfinding
 			var nextPosition = _tilemapConverter.CastToWorldPosition(new Vector2Int(nextNode.X, nextNode.Y));
 			for(int i = 0; i < path.Count - 1; i++)
 			{
-				//Debug.DrawLine(_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i].X, path[i].Y)),
-				//	_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i + 1].X, path[i + 1].Y)), Color.red, 1f);
+				Debug.DrawLine(_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i].X, path[i].Y)),
+					_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i + 1].X, path[i + 1].Y)), Color.red, 1f);
 			}
 			return nextPosition;
 		}

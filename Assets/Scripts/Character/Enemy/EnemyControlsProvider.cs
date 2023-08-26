@@ -71,7 +71,7 @@ namespace Characters.Enemy
 			{
 				return;
 			}
-			UpdatePath();
+			UpdatePath(false);
 			OnMove?.Invoke(NextWaypoint - (Vector2)transform.position);
 			OnAttack?.Invoke();
 		}

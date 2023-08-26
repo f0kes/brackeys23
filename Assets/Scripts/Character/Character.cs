@@ -21,7 +21,8 @@ namespace Characters
 		[SerializeField] private FlareItem _flareItem; //TODO: remove this
 		[SerializeField] private JellyFishItem _jellyFishItem; //TODO: remove this
 		[SerializeField] private AudioSource audioSource;
-		
+		[SerializeField] private float _attackRange = 0;
+
 		private IInventory _inventory;
 		private IItem _currentItem;
 		private IItemUseService _itemUseService;
@@ -32,7 +33,7 @@ namespace Characters
 		protected float AccelerationCooldown;
 		protected bool IsMoving;
 		protected Vector2 Direction;
-		
+
 
 		private int _health;
 
@@ -181,7 +182,7 @@ namespace Characters
 
 		public virtual float GetAttackRange()
 		{
-			return 2f;
+			return _attackRange == 0 ? 2f : _attackRange;
 		}
 
 		public virtual float GetAttackSpeed()
