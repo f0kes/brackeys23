@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216c53f99ed94ddf911432c08b57f89a, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 10
   Velocity: 3
   AcceleratedVelocity: 6
   AccelerationTime: 3
-  AccelerationCooldown: 0
+  AccelerationCooldown: 1

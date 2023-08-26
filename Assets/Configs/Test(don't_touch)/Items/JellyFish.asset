@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f07b991ba53e4812ac450439ce540fac, type: 3}
   m_Name: JellyFish
   m_EditorClassIdentifier: 
-  Cooldown: 3
+  Cooldown: 8
   SpawnTimer: 1
   SpawnRadius: 10
   SpawnPoint: {x: 0, y: 0}
@@ -20,12 +20,10 @@ MonoBehaviour:
   - KeyPoint: 0
     MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
   - KeyPoint: 1
-    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
   - KeyPoint: 2
-    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
   - KeyPoint: 3
-    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
   - KeyPoint: 4
-    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
-  - KeyPoint: 5
-    MonsterPreset: {fileID: 11400000, guid: 7dd63c64a90eee24da98b6490e51d76e, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
