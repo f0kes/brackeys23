@@ -20,12 +20,54 @@ MonoBehaviour:
   - KeyPoint: 0
     MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
   - KeyPoint: 1
-    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
   - KeyPoint: 2
-    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
   - KeyPoint: 3
-    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
   - KeyPoint: 4
-    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
   - KeyPoint: 5
-    MonsterPreset: {fileID: 11400000, guid: 4ca69d539fb3c4546b4eb50e575850cf, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+  - KeyPoint: 6
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+  - KeyPoint: 7
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+  - KeyPoint: 8
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 9
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 10
+    MonsterPreset: {fileID: 11400000, guid: ee2d6169ea6cd2b48bddce2a2bd468de, type: 2}
+  - KeyPoint: 11
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
+  - KeyPoint: 12
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
+  - KeyPoint: 13
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+  - KeyPoint: 14
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 15
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 16
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 17
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 18
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
+  - KeyPoint: 19
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 20
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 21
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 22
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
+  - KeyPoint: 23
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+  - KeyPoint: 24
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+  - KeyPoint: 25
+    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+  - KeyPoint: 26
+    MonsterPreset: {fileID: 11400000, guid: fe74245e60a089143ae46004811ae8d9, type: 2}
