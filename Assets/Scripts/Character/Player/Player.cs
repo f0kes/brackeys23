@@ -19,7 +19,7 @@ namespace Characters.Player
 		[SerializeField] private AudioClip[] stepAudioClips;
 		[SerializeField] private float walkStepDelay;
 		[SerializeField] private float runStepDelay;
-		
+
 		[SerializeField] private PlayerAnimationBehaviour animate;
 		private Vector2 _lastStepPosition;
 
@@ -29,6 +29,7 @@ namespace Characters.Player
 		private float _runCooldownTimer;
 		private float _slow;
 		private float _slowTimer;
+		private bool _slowed = false;
 
 		protected override void Awake()
 		{
@@ -48,33 +49,40 @@ namespace Characters.Player
 		public override void Update()
 		{
 			HandleRunning();
-			if(!((_lastStepPosition - (Vector2)transform.position).magnitude >= _stepLength)) return;
-			_lastStepPosition = transform.position;
-			_lightSource.Blink();
 			_slowTimer -= Time.deltaTime;
-			if(_slowTimer <= 0)
+			if(_slowTimer <= 0 && _slowed)
 			{
+				Debug.Log("Remove slow");
 				RemoveSlow();
 			}
+			if(((_lastStepPosition - (Vector2)transform.position).magnitude >= _stepLength))
+			{
+				_lastStepPosition = transform.position;
+				_lightSource.Blink();
+			}
 		}
-		
+
 		public void SetSlow(float percentage, float time)
 		{
-			_speed /= (1 - _slow);
-			_runningSpeed /= (1 - _slow);
-
 			_slow = percentage;
 
-			_speed *= (1 - _slow);
-			_runningSpeed *= (1 - _slow);
+			Debug.Log("Set slow, old speed: " + _speed);
+			_speed = _playerData.Velocity * (1 - _slow);
+			_runningSpeed = _playerData.AcceleratedVelocity * (1 - _slow);
+			Debug.Log("Set slow, new speed: " + _speed);
+
 
 			_slowTimer = time;
+			_slowed = true;
 		}
 		public void RemoveSlow()
 		{
-			_speed /= (1 - _slow);
-			_runningSpeed /= (1 - _slow);
+			Debug.Log("Remove slow, old speed: " + _speed);
+			_speed = _playerData.Velocity;
+			_runningSpeed = _playerData.AcceleratedVelocity;
+			Debug.Log("Remove slow, new speed: " + _speed);
 			_slow = 0;
+			_slowed = false;
 		}
 
 		private void HandleRunning()
@@ -102,9 +110,9 @@ namespace Characters.Player
 		{
 			base.Move(direction);
 			animate.SendLegsDirection(direction);
-			if (IsMoving)
+			if(IsMoving)
 			{
-				if (_isRunning)
+				if(_isRunning)
 				{
 					animate.playRunAnimation();
 				}
@@ -169,7 +177,7 @@ namespace Characters.Player
 		{
 			while (true)
 			{
-				if (!IsMoving)
+				if(!IsMoving)
 				{
 					yield return new WaitForSeconds(0.1f);
 					continue;

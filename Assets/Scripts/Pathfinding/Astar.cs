@@ -85,8 +85,10 @@ namespace Pathfinding
 		}
 		public List<Node> GetPath(Vector2Int start, Vector2Int end, int maxIterations = 1000000)
 		{
-			var openList = new List<Node>();
-			var closedList = new List<Node>();
+			//var openList = new List<Node>();
+			//var closedList = new List<Node>();
+			var openList = new HashSet<Node>();
+			var closedList = new HashSet<Node>();
 
 			var startNode = FindNodeWithPosition(start);
 			var endNode = FindNodeWithPosition(end);
@@ -103,12 +105,12 @@ namespace Pathfinding
 			while (openList.Count > 0 && maxIterations > 0)
 			{
 				maxIterations--;
-				var currentNode = openList[0];
-				for(int i = 1; i < openList.Count; i++)
+				var currentNode = openList.First();
+				foreach(var node in openList)
 				{
-					if(openList[i].G + openList[i].H < currentNode.G + currentNode.H)
+					if(node.G + node.H < currentNode.G + currentNode.H)
 					{
-						currentNode = openList[i];
+						currentNode = node;
 					}
 				}
 				openList.Remove(currentNode); //use a heap instead
