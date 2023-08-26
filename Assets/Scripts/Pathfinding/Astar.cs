@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 namespace Pathfinding
 {
@@ -69,6 +70,7 @@ namespace Pathfinding
 			}
 		}
 		private Node[,] _grid;
+		private Dictionary<Vector2Int, Node> _nodeDictionary = new Dictionary<Vector2Int, Node>();
 		public Astar(Node[,] grid)
 		{
 			_grid = grid;
@@ -133,7 +135,15 @@ namespace Pathfinding
 		}
 		private Node FindNodeWithPosition(Vector2Int position)
 		{
-			return _grid.Cast<Node>().FirstOrDefault(node => node.X == position.x && node.Y == position.y);
+			if(_nodeDictionary.ContainsKey(position))
+			{
+				return _nodeDictionary[position];
+			}
+			var node = _grid.Cast<Node>().FirstOrDefault(node => node.X == position.x && node.Y == position.y);
+			if(node == null) return null;
+
+			_nodeDictionary.Add(position, node);
+			return node;
 		}
 		private int GetDistance(Node currentNode, Node neighbor)
 		{

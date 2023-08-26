@@ -41,6 +41,7 @@ namespace Characters.Enemy
 			NextWaypoint = position;
 			PathFindingService = GameManager.Instance.GetService<IPathFindingService>();
 			LightService = GameManager.Instance.GetService<ILightService>();
+			_timeSinceLastPathUpdate = PathFindingService.GetPathRequestTimeOffset() % _timeBetweenPathUpdates;
 		}
 		protected virtual Vector2 GetTarget()
 		{

@@ -10,6 +10,8 @@ namespace Services.Pathfinding
 	{
 		private readonly Astar _astar;
 		private readonly IMapGenerator _tilemapConverter;
+		private float _lastPathRequestTime;
+		private float _pathRequestTimeOffset = 0.1f;
 
 		public PathFindingService(IMapGenerator mapGenerator)
 		{
@@ -56,6 +58,12 @@ namespace Services.Pathfinding
 			nextNode = currentNodeIndex >= path.Count - 1 ? path[^1] : path[currentNodeIndex];
 			var nextPosition = _tilemapConverter.CastToWorldPosition(new Vector2Int(nextNode.X, nextNode.Y));
 			return nextPosition;
+		}
+
+		public float GetPathRequestTimeOffset()
+		{
+			_lastPathRequestTime += _pathRequestTimeOffset;
+			return _lastPathRequestTime;
 		}
 	}
 }
