@@ -43,6 +43,8 @@ namespace Characters.Items
 			var gameManager = GameManager.Instance;
 			var spawnService = gameManager.GetService<ICharacterSpawner>();
 			var progression = gameManager.GetService<IProgressionService>().GetKeyPoint();
+			//check if we have enemies to spawn
+			if(_itemData.MonsterProgressions.All(x => x.KeyPoint != progression)) yield break;
 			var enemies = _itemData.MonsterProgressions.FirstOrDefault(x => x.KeyPoint == progression).MonsterPreset.MonsterCounts;
 			var position = _itemData.SpawnPoint + GetAnchor(character);
 			//Debug.DrawLine((position - Vector2.up * 0.5f), position + Vector2.up * 0.5f, Color.red, 5f);
