@@ -22,6 +22,7 @@ namespace Characters.Items.Implementations.JellyFish
 		[SerializeField] private float _deactivationTime;
 		[SerializeField] private Color _lampColor;
 		[SerializeField] private float _lampIntensity;
+		[SerializeField] private AudioClip audioClip;
 
 		private Dictionary<LightSource, LampState> _lampStates;
 		private readonly List<LightSource> _lampPool = new List<LightSource>();
@@ -66,6 +67,7 @@ namespace Characters.Items.Implementations.JellyFish
 			base.Use(user);
 			StartActivatingLamps(user);
 			RandomizeOffsets();
+			user.GetAudioSource().PlayOneShot(audioClip);
 		}
 
 		public override void Update()

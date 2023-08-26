@@ -1,10 +1,10 @@
-﻿using System;
+﻿
 using System.Collections;
-using System.Collections.Generic;
 using GameState;
 using Services.Light;
 using Services.Projectile;
 using UnityEngine;
+
 
 namespace Characters.Enemy
 {
@@ -21,7 +21,10 @@ namespace Characters.Enemy
         [SerializeField] private GameObject openedSprite;
         [SerializeField] private GameObject closedSprite;
         [SerializeField] private ParanoidPupil pupil;
-
+       
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip[] openAudioClips;
+        [SerializeField] private AudioClip shotAudioClip;
 
         private State _state;
         private Coroutine _closeCoroutine;
@@ -86,7 +89,8 @@ namespace Characters.Enemy
                 Velocity = velocity,
                 Lifetime = projectileLifeTime,
                 Damage = damage
-            }, this); ;
+            }, this); 
+            audioSource.PlayOneShot(shotAudioClip);
         }
 
         private void Close()
@@ -104,6 +108,7 @@ namespace Characters.Enemy
             pupil.gameObject.SetActive(true);
             openedSprite.SetActive(true);
             closedSprite.SetActive(false);
+            audioSource.PlayOneShot(openAudioClips[Random.Range(0, openAudioClips.Length)]);
         }
 
 

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using Services.Light;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Characters.Player
 {
@@ -13,6 +16,11 @@ namespace Characters.Player
 		[SerializeField] private float _stepLength;
 		[SerializeField] private PlayerLight _lightSource;
 		[SerializeField] private PlayerData _playerData;
+		[SerializeField] private AudioClip[] stepAudioClips;
+		[SerializeField] private float walkStepDelay;
+		[SerializeField] private float runStepDelay;
+		
+		[SerializeField] private PlayerAnimationBehaviour animate;
 		private Vector2 _lastStepPosition;
 
 		private bool _canRun = true;
@@ -29,6 +37,8 @@ namespace Characters.Player
 			Instance = this;
 			SetPlayerData(Instantiate(_playerData));
 			base.Awake();
+			StartCoroutine(HandleStepSounds());
+			animate.playIdleAnimation();
 		}
 		protected override void Start()
 		{
@@ -88,6 +98,27 @@ namespace Characters.Player
 			}
 		}
 
+		public override void Move(Vector2 direction)
+		{
+			base.Move(direction);
+			animate.SendLegsDirection(direction);
+			if (IsMoving)
+			{
+				if (_isRunning)
+				{
+					animate.playRunAnimation();
+				}
+				else
+				{
+					animate.playWalkAnimation();
+				}
+			}
+			else
+			{
+				animate.playIdleAnimation();
+			}
+		}
+
 		public void SetPlayerData(PlayerData data)
 		{
 			_maxHealth = data.MaxHealth;
@@ -132,6 +163,20 @@ namespace Characters.Player
 		public override int GetTeamId()
 		{
 			return 0;
+		}
+
+		private IEnumerator HandleStepSounds()
+		{
+			while (true)
+			{
+				if (!IsMoving)
+				{
+					yield return new WaitForSeconds(0.1f);
+					continue;
+				}
+				GetAudioSource().PlayOneShot(stepAudioClips[Random.Range(0, stepAudioClips.Length)]);
+				yield return new WaitForSeconds(_isRunning ? runStepDelay : walkStepDelay);
+			}
 		}
 	}
 }
