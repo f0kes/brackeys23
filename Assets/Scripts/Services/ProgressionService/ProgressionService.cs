@@ -40,7 +40,7 @@ namespace Services.ProgressionService
 
 		public void AddLight()
 		{
-			_lightService.SetAmbientLightIntensity(_lightService.GetAmbientLightIntensity() + _lightProgression.DeltaBrightness);
+			_lightService.SetAmbientLightIntensity(_lightService.GetAmbientLightIntensity() - _lightProgression.DeltaBrightness);
 		}
 	}
 }
