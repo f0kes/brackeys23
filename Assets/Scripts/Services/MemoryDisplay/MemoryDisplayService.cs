@@ -10,6 +10,7 @@ namespace Services.MemoryDisplay
 {
 	public class MemoryDisplayService : MonoBehaviour, IMemoryDisplayService
 	{
+		public event Action OnHide;
 		[SerializeField] private GameObject _memoryDisplay;
 		[SerializeField] private TextMeshProUGUI _memoryText;
 		[SerializeField] private AudioSource _audioSource;
@@ -29,6 +30,7 @@ namespace Services.MemoryDisplay
 		{
 			Hide();
 		}
+
 		public void DisplayMemory(string memory, AudioClip audioClip)
 		{
 			PlayerControlsProvider.Instance.DisableControls();
@@ -38,17 +40,11 @@ namespace Services.MemoryDisplay
 			_audioSource.Play();
 		}
 
-		public void PassHideAction(Action hideAction)
-		{
-			_hideButton.onClick.AddListener(() =>
-			{
-				hideAction?.Invoke();
-			});
-		}
 
 		public void Hide()
 		{
 			StartCoroutine(ReturnControl());
+			OnHide?.Invoke();
 		}
 
 		private IEnumerator ReturnControl()

@@ -42,9 +42,14 @@ namespace Progression.MemoryItem
 			//_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
 			player.Heal(_healAmount);
 			_memoryDisplayService.DisplayMemory(_memoryText, _memorySound);
-			_memoryDisplayService.PassHideAction(() => { _progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1); });
+			_memoryDisplayService.OnHide += OnMemoryDisplayHide;
 			_progressionService.OnKeyPointChanged -= OnKeyPointChanged;
 			Destroy(gameObject);
+		}
+		private void OnMemoryDisplayHide()
+		{
+			_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
+			_memoryDisplayService.OnHide -= OnMemoryDisplayHide;
 		}
 		private void OnDestroy()
 		{
