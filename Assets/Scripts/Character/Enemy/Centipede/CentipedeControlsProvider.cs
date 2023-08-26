@@ -154,7 +154,7 @@ namespace Characters.Enemy.Centipede
 			{
 				return;
 			}
-			_timeSinceLastPathUpdate += Time.deltaTime;
+			_timeSinceLastPathUpdate += Time.fixedDeltaTime;
 			var atTarget = (Vector2.Distance(transform.position, FinalTarget) < 1f) && checkTarget;
 			if(_timeSinceLastPathUpdate > _timeBetweenPathUpdates)
 			{
