@@ -14,40 +14,29 @@ namespace Services.MemoryDisplay
 		[SerializeField] private TextMeshProUGUI _memoryText;
 		[SerializeField] private AudioSource _audioSource;
 		[SerializeField] private Button _hideButton;
-		[SerializeField] private GameObject _tip;
-
-		private Coroutine _coroutine;
 
 		private void Awake()
 		{
 			_hideButton.onClick.AddListener(Hide);
-			_tip.SetActive(false);
+			//GameInitializer.OnGameInitialized += RegisterService;
 		}
-		
+		private void RegisterService()
+		{
+			GameManager.Instance.RegisterService<IMemoryDisplayService>(this, true);
+			GameInitializer.OnGameInitialized -= RegisterService;
+		}
 		private void Start()
 		{
 			Hide();
 		}
 		public void DisplayMemory(string memory, AudioClip audioClip)
 		{
-			_tip.SetActive(false);
 			PlayerControlsProvider.Instance.DisableControls();
 			_memoryDisplay.SetActive(true);
 			_memoryText.text = memory;
 			_audioSource.clip = audioClip;
 			_audioSource.Play();
 		}
-
-		public void ShowTip()
-		{
-			if (_coroutine != null)
-			{
-				StopCoroutine(_coroutine);
-			}
-			_tip.SetActive(true);
-			_coroutine = StartCoroutine(HideTip());
-		}
-
 		public void Hide()
 		{
 			StartCoroutine(ReturnControl());
@@ -58,12 +47,6 @@ namespace Services.MemoryDisplay
 			yield return null;
 			_memoryDisplay.SetActive(false);
 			PlayerControlsProvider.Instance.EnableControls();
-		}
-
-		private IEnumerator HideTip()
-		{
-			yield return new WaitForSeconds(0.1f);
-			_tip.SetActive(false);
 		}
 	}
 }

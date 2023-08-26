@@ -37,11 +37,7 @@ namespace Progression.MemoryItem
 			if(player == null) return;
 			var distance = Vector2.Distance(transform.position, player.transform.position);
 			if(!(distance < _activationRange)) return;
-			if(!Input.GetKeyDown(KeyCode.Space))
-			{
-				_memoryDisplayService.ShowTip();
-				return;
-			}
+			if(!Input.GetKeyDown(KeyCode.Space)) return;
 			_progressionService.SetKeyPoint(_progressionService.GetKeyPoint() + 1);
 			player.Heal(_healAmount);
 			_memoryDisplayService.DisplayMemory(_memoryText, _memorySound);

@@ -6,6 +6,5 @@ namespace Services.MemoryDisplay
 	{
 		void DisplayMemory(string memory, AudioClip audioClip);
 
-		void ShowTip();
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
+
 namespace Characters.Movement
 {
 	public class PlayerControlsProvider : MonoBehaviour, IControlsProvider
