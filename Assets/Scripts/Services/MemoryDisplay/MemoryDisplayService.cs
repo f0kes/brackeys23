@@ -21,7 +21,7 @@ namespace Services.MemoryDisplay
 
 		private void Awake()
 		{
-			_hideButton.onClick.AddListener(Hide);
+			_hideButton.onClick.AddListener(HideAndReturnControl);
 		}
 
 		private void Start()
@@ -56,9 +56,14 @@ namespace Services.MemoryDisplay
 			_tip.SetActive(false);
 		}
 
-		public void Hide()
+		public void HideAndReturnControl()
 		{
 			StartCoroutine(ReturnControl());
+			OnHide?.Invoke();
+		}
+		
+		public void Hide()
+		{
 			OnHide?.Invoke();
 		}
 
