@@ -12,5 +12,7 @@ namespace Services.Pathfinding
 		List<Astar.Node> GetPath(Vector2 startPosition, Vector2 targetPosition);
 
 		Vector2 GetNextPosition(List<Astar.Node> path, int currentNodeIndex);
+
+		float GetPathRequestTimeOffset();
 	}
 }

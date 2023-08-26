@@ -57,6 +57,7 @@ namespace Characters.Enemy.Centipede
 			_controlsBinder = GameManager.Instance.GetService<IControlsBinder>();
 			_controlsBinder.Bind(this, GetComponent<Character>()); //todo: do something with this
 			LightService.OnLightEvent += OnLight;
+			_timeSinceLastPathUpdate = PathFindingService.GetPathRequestTimeOffset() % _timeBetweenPathUpdates;
 		}
 
 		private void OnLight(Vector2 obj)
