@@ -543,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aggroRange: 0
   _minAggroLightIntensity: 0.2
+  _timeBetweenPathUpdates: 2
 --- !u!58 &4500312987600799319
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -575,8 +576,8 @@ MonoBehaviour:
   projectileSpeed: 10
   projectileLifeTime: 5
   damage: 1
-  deactivatingTime: 6
-  engageDistance: 8
+  deactivatingTime: 10
+  engageDistance: 12
   projectile: {fileID: 7015200203576148106, guid: cd13ae13f08262249bc15c850aac25d1, type: 3}
   openedSprite: {fileID: 1045817782321079678}
   closedSprite: {fileID: 6416871181832630353}

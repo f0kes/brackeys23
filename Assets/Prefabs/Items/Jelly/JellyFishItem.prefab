@@ -46,14 +46,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemData: {fileID: 11400000, guid: dfbfa25ca420df741b0a31c6afd72096, type: 2}
   _lampPrefab: {fileID: 1992536108856757183, guid: 07cb1030f83566a4e912e799632cc731, type: 3}
-  _innerSpawnRadius: 3
-  _outerSpawnRadius: 4
+  _innerSpawnRadius: 1
+  _outerSpawnRadius: 2
   _lampCount: 10
   _minLampAcceleration: 3
   _maxLampAcceleration: 12
-  _lifetime: 4
-  _activationTime: 1
-  _deactivationTime: 1
-  _lampColor: {r: 1, g: 1, b: 1, a: 1}
-  _lampIntensity: 1
+  _lifetime: 1.5
+  _activationTime: 0.5
+  _deactivationTime: 0.5
+  _lampColor: {r: 0.34117648, g: 0.5254902, b: 0.54901963, a: 1}
+  _lampIntensity: 0.25
   audioClip: {fileID: 8300000, guid: 31ed1ec20967f1c4792fbe946f1387fe, type: 3}
