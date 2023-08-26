@@ -12,29 +12,7 @@ namespace Characters.Enemy
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(Data.Velocity.y, Data.Velocity.x) * Mathf.Rad2Deg);
             _launched = true;
         }
-
-
-        private void OnCollisionEnter2D(Collision2D col)
-        {
-            Debug.Log(1);
-            col.gameObject.TryGetComponent(out ParanoidEyeBehaviour eye);
-            if (eye != null)
-            {
-                return;
-            }
-            
-            col.gameObject.TryGetComponent(out Player.Player player);
-            if (player != null)
-            {
-                Debug.Log(2);
-                player.TakeDamage(Data.Damage);
-            }
-            Rigidbody.velocity = Vector2.zero;
-            Destroy(this.gameObject, 1f);
-            _launched = false;
-            
-            
-        }
+        
 
         protected override void Move()
         {
@@ -48,7 +26,7 @@ namespace Characters.Enemy
 
             for (var i = 0; i < size; i++)
             {
-                var damagable = results[i].GetComponent<IDamagable>();
+                var damagable = results[i].GetComponent<Player.Player>();
                 if (damagable != null)
                 {
                     damagable.TakeDamage(Data.Damage);

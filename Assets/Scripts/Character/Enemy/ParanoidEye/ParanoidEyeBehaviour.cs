@@ -81,7 +81,6 @@ namespace Characters.Enemy
             var target = Characters.Player.Player.Instance.GetPosition();
             var velocity = (target - centerPosition).normalized * projectileSpeed;
             var startPosition = centerPosition + (target - centerPosition).normalized * 0.8f;
-            Debug.Log(0);
             GameManager.Instance.GetService<IProjectileService>().CreateProjectile(projectile, new ProjectileData()
             {
                 Range = 999999,
@@ -120,8 +119,6 @@ namespace Characters.Enemy
 
         public void OnProjectileHit(IProjectile projectile)
         {
-            Debug.Log("STUK");
-          // Player.Player.Instance.TakeDamage(damage);
         }
 
         public void OnProjectileTick(IProjectile projectile)
