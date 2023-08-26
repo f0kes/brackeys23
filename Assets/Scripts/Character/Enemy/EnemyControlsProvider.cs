@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Characters.Movement;
 using GameState;
+using Pathfinding;
 using Services.Light;
 using Services.Pathfinding;
 using UnityEngine;
@@ -22,12 +23,17 @@ namespace Characters.Enemy
 
 		[SerializeField] private float _aggroRange;
 		[SerializeField] private float _minAggroLightIntensity = 0.2f;
+		[SerializeField] private float _timeBetweenPathUpdates = 2f;
 
 		protected Vector2 FinalTarget;
 		protected Vector2 NextWaypoint;
+		protected List<Astar.Node> Path;
+		protected int CurrentNodeIndex;
 
 		protected IPathFindingService PathFindingService;
 		protected ILightService LightService;
+
+		private float _timeSinceLastPathUpdate = 0f;
 		private void Start()
 		{
 			var position = transform.position;
@@ -64,13 +70,29 @@ namespace Characters.Enemy
 			{
 				return;
 			}
-			var atTarget = Vector2.Distance(transform.position, FinalTarget) < 1f;
-			if((Vector2.Distance(transform.position, NextWaypoint) < 1f || NextWaypoint == Vector2.zero) && !atTarget)
-			{
-				NextWaypoint = PathFindingService.GetNextPosition(transform.position, FinalTarget);
-			}
+			UpdatePath();
 			OnMove?.Invoke(NextWaypoint - (Vector2)transform.position);
 			OnAttack?.Invoke();
+		}
+		protected virtual void UpdatePath(bool checkTarget = true)
+		{
+			if(FinalTarget == Vector2.zero)
+			{
+				return;
+			}
+			_timeSinceLastPathUpdate += Time.deltaTime;
+			var atTarget = (Vector2.Distance(transform.position, FinalTarget) < 1f) && checkTarget;
+			if(_timeSinceLastPathUpdate > _timeBetweenPathUpdates)
+			{
+				Path = PathFindingService.GetPath(transform.position, FinalTarget);
+				_timeSinceLastPathUpdate = 0f;
+				CurrentNodeIndex = 0;
+			}
+			if((Vector2.Distance(transform.position, NextWaypoint) < 1f || NextWaypoint == Vector2.zero) && !atTarget)
+			{
+				NextWaypoint = PathFindingService.GetNextPosition(Path, CurrentNodeIndex);
+				CurrentNodeIndex++;
+			}
 		}
 	}
 }
