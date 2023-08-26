@@ -203,7 +203,7 @@ MonoBehaviour:
   - {x: 0.39902735, y: -0.37158227, z: 0}
   m_ShapePathHash: 2076868639
   m_Mesh: {fileID: 0}
-  m_InstanceId: 115538
+  m_InstanceId: 121898
 --- !u!61 &3380859708373618155
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   _maxHealth: 0
   _flareItem: {fileID: 664162776488353456, guid: f6324242db6f6a54883d834c66cb411a, type: 3}
   _jellyFishItem: {fileID: 8574295637840307639, guid: 6a5356d93ed61904eb2919e7c8954fbc, type: 3}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: -4504248938731660664}
   _lifeTime: 10
 --- !u!82 &-4504248938731660664
 AudioSource:
