@@ -1,4 +1,5 @@
-﻿using Pathfinding;
+﻿using System.Collections.Generic;
+using Pathfinding;
 using Services.Map;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -20,10 +21,6 @@ namespace Services.Pathfinding
 		{
 			var startTileMapPosition = _tilemapConverter.CastToTilemapPosition(startPosition);
 			var targetTileMapPosition = _tilemapConverter.CastToTilemapPosition(targetPosition);
-			
-			Debug.Log(startTileMapPosition + " from");
-			Debug.Log(targetTileMapPosition+ " to");
-			
 
 			var path = _astar.GetPath(startTileMapPosition, targetTileMapPosition);
 			if(path == null || path.Count < 2)
@@ -34,9 +31,30 @@ namespace Services.Pathfinding
 			var nextPosition = _tilemapConverter.CastToWorldPosition(new Vector2Int(nextNode.X, nextNode.Y));
 			for(int i = 0; i < path.Count - 1; i++)
 			{
-				Debug.DrawLine(_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i].X, path[i].Y)),
-					_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i + 1].X, path[i + 1].Y)), Color.red, 1f);
+				//Debug.DrawLine(_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i].X, path[i].Y)),
+				//	_tilemapConverter.CastToWorldPosition(new Vector2Int(path[i + 1].X, path[i + 1].Y)), Color.red, 1f);
 			}
+			return nextPosition;
+		}
+
+		public List<Astar.Node> GetPath(Vector2 startPosition, Vector2 targetPosition)
+		{
+			var startTileMapPosition = _tilemapConverter.CastToTilemapPosition(startPosition);
+			var targetTileMapPosition = _tilemapConverter.CastToTilemapPosition(targetPosition);
+
+			var path = _astar.GetPath(startTileMapPosition, targetTileMapPosition);
+			return path;
+		}
+
+		public Vector2 GetNextPosition(List<Astar.Node> path, int currentNodeIndex)
+		{
+			if(path == null || path.Count < 2)
+			{
+				return Vector2.zero;
+			}
+			Astar.Node nextNode;
+			nextNode = currentNodeIndex >= path.Count - 1 ? path[^1] : path[currentNodeIndex];
+			var nextPosition = _tilemapConverter.CastToWorldPosition(new Vector2Int(nextNode.X, nextNode.Y));
 			return nextPosition;
 		}
 	}

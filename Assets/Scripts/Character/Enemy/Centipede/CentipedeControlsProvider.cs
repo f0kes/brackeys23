@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Characters.Movement;
 using GameState;
+using Pathfinding;
 using Services.Light;
 using Services.Pathfinding;
 using UnityEngine;
@@ -20,6 +22,7 @@ namespace Characters.Enemy.Centipede
 
 		[SerializeField] private float _rotationSpeed;
 		[SerializeField] private float _aggroRange;
+		[SerializeField] private float _timeBetweenPathUpdates = 2f;
 		private Vector2 _lookDirection = Vector2.up;
 		protected Vector2 FinalTarget;
 		protected Vector2 NextWaypoint;
@@ -34,9 +37,12 @@ namespace Characters.Enemy.Centipede
 		private float _aggroTime;
 		private Vector2 _defaultPosition;
 		private float _minAggroLightIntensity;
+		protected List<Astar.Node> Path;
+		protected int CurrentNodeIndex;
 
 		private bool _aggro;
 		private float _aggroTimer;
+		private float _timeSinceLastPathUpdate = 0f;
 		private void Awake()
 		{
 			_targetFunc = GetClosestLight;
@@ -120,27 +126,41 @@ namespace Characters.Enemy.Centipede
 				_aggro = false;
 				_targetFunc = () => _defaultPosition;
 			}
+			_timeSinceLastPathUpdate += Time.deltaTime;
 			if(IsPlayerInAggroRange()) Aggro();
 
 			FinalTarget = GetClosestLight();
-
-
 			if(FinalTarget == Vector2.zero)
 			{
 				FinalTarget = _defaultPosition;
 			}
 
-			var atTarget = Vector2.Distance(transform.position, FinalTarget) < 1f;
-			if((Vector2.Distance(transform.position, NextWaypoint) < 1f || NextWaypoint == Vector2.zero))
-			{
-				NextWaypoint = PathFindingService.GetNextPosition(transform.position, FinalTarget);
-			}
-
+			UpdatePath(false);
 			var position = transform.position;
 			_lookDirection = Vector3.RotateTowards(_lookDirection, NextWaypoint - (Vector2)position, _rotationSpeed * Time.deltaTime, 0f);
 			OnLookAt?.Invoke(((Vector2)position + _lookDirection));
 			OnMove?.Invoke(_lookDirection);
 			OnAttack?.Invoke();
+		}
+		protected virtual void UpdatePath(bool checkTarget = true)
+		{
+			if(FinalTarget == Vector2.zero)
+			{
+				return;
+			}
+			_timeSinceLastPathUpdate += Time.deltaTime;
+			var atTarget = (Vector2.Distance(transform.position, FinalTarget) < 1f) && checkTarget;
+			if(_timeSinceLastPathUpdate > _timeBetweenPathUpdates)
+			{
+				Path = PathFindingService.GetPath(transform.position, FinalTarget);
+				_timeSinceLastPathUpdate = 0f;
+				CurrentNodeIndex = 0;
+			}
+			if((Vector2.Distance(transform.position, NextWaypoint) < 1f || NextWaypoint == Vector2.zero) && !atTarget)
+			{
+				NextWaypoint = PathFindingService.GetNextPosition(Path, CurrentNodeIndex);
+				CurrentNodeIndex++;
+			}
 		}
 	}
 }
