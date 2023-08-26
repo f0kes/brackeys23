@@ -12,6 +12,7 @@ namespace Characters.Movement
 		public event Action OnAttack;
 		public event Action OnStartRunning;
 		public event Action OnStopRunning;
+		[SerializeField] private bool _cheatMode = false;
 
 		private void Update()
 		{
@@ -59,6 +60,12 @@ namespace Characters.Movement
 			if(Input.GetKeyUp(KeyCode.LeftShift))
 			{
 				OnStopRunning?.Invoke();
+			}
+			if(!_cheatMode) return;
+			if(Input.GetKeyDown(KeyCode.F1))
+			{
+				Player.Player.Instance.SetDefaultSpeed(10f);
+				Player.Player.Instance.GetBlinkSource().SetIntensity(10f);
 			}
 		}
 
