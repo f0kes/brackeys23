@@ -20,7 +20,8 @@ namespace Characters
 		[SerializeField] protected int _maxHealth;
 		[SerializeField] private FlareItem _flareItem; //TODO: remove this
 		[SerializeField] private JellyFishItem _jellyFishItem; //TODO: remove this
-
+		[SerializeField] private AudioSource audioSource;
+		
 		private IInventory _inventory;
 		private IItem _currentItem;
 		private IItemUseService _itemUseService;
@@ -29,6 +30,9 @@ namespace Characters
 		protected float _currentSpeed;
 		protected float AccelerationTime;
 		protected float AccelerationCooldown;
+		protected bool IsMoving;
+		protected Vector2 Direction;
+		
 
 		private int _health;
 
@@ -48,10 +52,12 @@ namespace Characters
 			_itemUseService = GameManager.Instance.GetService<IItemUseService>();
 			_currentSpeed = _speed;
 		}
-		public void Move(Vector2 direction)
+		public virtual void Move(Vector2 direction)
 		{
 			direction = direction.normalized;
 			_rigidbody2D.velocity = direction * _currentSpeed;
+			IsMoving = direction != Vector2.zero;
+			Direction = direction;
 		}
 
 		public Vector2 GetPosition()
@@ -130,6 +136,11 @@ namespace Characters
 		public virtual void SetRunningSpeed(float speed)
 		{
 			_runningSpeed = speed;
+		}
+
+		public AudioSource GetAudioSource()
+		{
+			return audioSource;
 		}
 
 

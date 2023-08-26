@@ -26,5 +26,7 @@ namespace Characters.Movement
 
 		void SetRunningSpeed(float speed);
 
+		AudioSource GetAudioSource();
+
 	}
 }
