@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shiftDistance: 0.1
+  _zOffset: 0
   startPosition: {x: 0, y: 0}
 --- !u!1 &5244254144385079374
 GameObject:
@@ -480,7 +481,7 @@ MonoBehaviour:
   - {x: 0.27934623, y: -0.84397364, z: 0}
   m_ShapePathHash: 877811735
   m_Mesh: {fileID: 0}
-  m_InstanceId: 78978
+  m_InstanceId: 70426
 --- !u!61 &9031653832318015432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -540,6 +541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574b77f5452248dd9ea0fbcb308eb004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aggroRange: 0
+  _minAggroLightIntensity: 0.2
 --- !u!58 &4500312987600799319
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -604,9 +607,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 2.4037163
-  MaxDistance: 500
+  MaxDistance: 8
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -614,23 +617,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.30046454
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -3.3295057
+      outSlope: -3.3295057
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.49138623
+      value: 0.33461
+      inSlope: -0.8323764
+      outSlope: -0.8323764
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.004306704
+      inSlope: -0.300584
+      outSlope: -0.300584
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -639,7 +651,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

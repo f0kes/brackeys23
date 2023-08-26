@@ -53,7 +53,7 @@ namespace Characters.Player
         public void SendLegsDirection(Vector2 direction)
         {
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            legsAnimator.transform.rotation = Quaternion.Euler(0,0, angle+90);
+            legsAnimator.transform.rotation = Quaternion.Euler(0,0, angle-90);
         }
 
         private enum State
