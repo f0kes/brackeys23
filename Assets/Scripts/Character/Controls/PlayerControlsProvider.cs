@@ -5,6 +5,7 @@ namespace Characters.Movement
 {
 	public class PlayerControlsProvider : MonoBehaviour, IControlsProvider
 	{
+		public static PlayerControlsProvider Instance{get; private set;}
 		public event Action<Vector2> OnMove;
 		public event Action<Vector2> OnLookAt;
 		public event Action<int> OnChangeItem;
@@ -12,10 +13,20 @@ namespace Characters.Movement
 		public event Action OnAttack;
 		public event Action OnStartRunning;
 		public event Action OnStopRunning;
+		private bool _controlsEnabled = true;
 		[SerializeField] private bool _cheatMode = false;
 
+		private void Awake()
+		{
+			Instance = this;
+		}
+		private void OnDestroy()
+		{
+			Instance = null;
+		}
 		private void Update()
 		{
+			if(!_controlsEnabled) return;
 			//var move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 			var right = Input.GetKey(KeyCode.D) ? 1 : 0;
 			var left = Input.GetKey(KeyCode.A) ? -1 : 0;
@@ -68,6 +79,13 @@ namespace Characters.Movement
 				Player.Player.Instance.GetBlinkSource().SetIntensity(10f);
 			}
 		}
-
+		public void EnableControls()
+		{
+			_controlsEnabled = true;
+		}
+		public void DisableControls()
+		{
+			_controlsEnabled = false;
+		}
 	}
 }
