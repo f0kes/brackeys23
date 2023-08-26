@@ -10,6 +10,7 @@ namespace Services.MemoryDisplay
 {
 	public class MemoryDisplayService : MonoBehaviour, IMemoryDisplayService
 	{
+		public event Action OnHide;
 		[SerializeField] private GameObject _memoryDisplay;
 		[SerializeField] private TextMeshProUGUI _memoryText;
 		[SerializeField] private AudioSource _audioSource;
@@ -17,7 +18,7 @@ namespace Services.MemoryDisplay
 		[SerializeField] private GameObject _tip;
 
 		private Coroutine _coroutine;
-		
+
 		private void Awake()
 		{
 			_hideButton.onClick.AddListener(Hide);
@@ -28,6 +29,7 @@ namespace Services.MemoryDisplay
 			_tip.SetActive(false);
 			Hide();
 		}
+
 		public void DisplayMemory(string memory, AudioClip audioClip)
 		{
 			_tip.SetActive(false);
@@ -40,12 +42,12 @@ namespace Services.MemoryDisplay
 
 		public void ShowTip()
 		{
-			if (_coroutine != null)
+			if(_coroutine != null)
 			{
 				StopCoroutine(_coroutine);
 			}
 			_tip.SetActive(true);
-			_coroutine =  StartCoroutine(HideTip());
+			_coroutine = StartCoroutine(HideTip());
 		}
 
 		public IEnumerator HideTip()
@@ -57,6 +59,7 @@ namespace Services.MemoryDisplay
 		public void Hide()
 		{
 			StartCoroutine(ReturnControl());
+			OnHide?.Invoke();
 		}
 
 		private IEnumerator ReturnControl()
