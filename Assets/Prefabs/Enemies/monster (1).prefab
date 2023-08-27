@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _aggroRange: 15
-  _minAggroLightIntensity: 0.2
+  _minAggroLightIntensity: 0.1
   _timeBetweenPathUpdates: 2
 --- !u!114 &2506369199456371846
 MonoBehaviour:
