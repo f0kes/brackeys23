@@ -24,6 +24,6 @@ MonoBehaviour:
   - KeyPoint: 2
     MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
   - KeyPoint: 3
-    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: 873ebf0748e6ab746ab59615042e0bde, type: 2}
   - KeyPoint: 4
-    MonsterPreset: {fileID: 11400000, guid: 7e8491d0caa128e42a60fb135dae1104, type: 2}
+    MonsterPreset: {fileID: 11400000, guid: 931846ef6ebef5f44902d1f193be8d66, type: 2}

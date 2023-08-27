@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b40e9c8644094d2d90bb17413088c869, type: 3}
   m_Name: LightProgression
   m_EditorClassIdentifier: 
-  MaxBrightness: 0.2
+  MaxBrightness: 0.13
   DeltaBrightness: 0.01
