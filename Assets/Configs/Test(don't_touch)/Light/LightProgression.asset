@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: LightProgression
   m_EditorClassIdentifier: 
   MaxBrightness: 0.2
-  DeltaBrightness: 0.01
+  DeltaBrightness: 0.1

@@ -180,9 +180,9 @@ GameObject:
   - component: {fileID: 6614581288778698825}
   - component: {fileID: 6614581288778698821}
   - component: {fileID: 6614581288778698827}
-  - component: {fileID: 6614581288778698826}
   - component: {fileID: 9136536887162479370}
   - component: {fileID: 7837384991901255999}
+  - component: {fileID: 6445133579801951002}
   m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
@@ -294,32 +294,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &6614581288778698826
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6614581288778698831}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8980962, y: 0.73200005}
-    newSize: {x: 4.4904804, y: 3.66}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8980962, y: 0.73200005}
-  m_EdgeRadius: 0
 --- !u!82 &9136536887162479370
 AudioSource:
   m_ObjectHideFlags: 0
@@ -443,6 +417,7 @@ MonoBehaviour:
   _flareItem: {fileID: 664162776488353456, guid: f6324242db6f6a54883d834c66cb411a, type: 3}
   _jellyFishItem: {fileID: 8574295637840307639, guid: 6a5356d93ed61904eb2919e7c8954fbc, type: 3}
   audioSource: {fileID: 9136536887162479370}
+  _attackRange: 1
   _lifeTime: -1
   _controlsProvider: {fileID: 6614581288778698821}
   _aggroRange: 5
@@ -451,5 +426,20 @@ MonoBehaviour:
   _aggroTime: 3
   _slowTime: 2
   _slowPercent: 0.6
-  _attackRange: 1
   _minLightAggroIntensity: 0.2
+--- !u!58 &6445133579801951002
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6614581288778698831}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.26

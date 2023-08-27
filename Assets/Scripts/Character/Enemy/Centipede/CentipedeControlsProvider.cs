@@ -124,7 +124,12 @@ namespace Characters.Enemy.Centipede
 		}
 		protected virtual Vector2 GetTarget()
 		{
-			return _targetFunc();
+			FinalTarget = GetClosestLight();
+			if(FinalTarget != Vector2.zero) return FinalTarget;
+
+			FinalTarget = GetRandomPosition();
+			
+			return FinalTarget;
 		}
 		protected virtual void Update()
 		{
@@ -137,13 +142,8 @@ namespace Characters.Enemy.Centipede
 			_timeSinceLastPathUpdate += Time.deltaTime;
 			if(IsPlayerInAggroRange()) Aggro();
 
-			FinalTarget = GetClosestLight();
-			if(FinalTarget == Vector2.zero)
-			{
-				FinalTarget = GetRandomPosition();
-			}
-
-			if(!_aggro) UpdatePath(false);
+			GetTarget();
+			UpdatePath(false);
 			var position = transform.position;
 			var target = NextWaypoint - (Vector2)position;
 			if(_aggro)
@@ -161,25 +161,17 @@ namespace Characters.Enemy.Centipede
 		}
 		private Vector2 GetRandomPosition()
 		{
-			if(AtTarget())
-			{
-				_isRandomPositionSet = false;
-			}
-			if(!_isRandomPositionSet)
-			{
-				_isRandomPositionSet = true;
-				_lastRandomPosition = _mapService.GetRandomEmptyTile();
-			}
+			_lastRandomPosition = _mapService.GetRandomEmptyTile();
 			return _lastRandomPosition;
 		}
-		protected virtual void UpdatePath(bool checkTarget = true)
+		protected virtual bool UpdatePath(bool checkTarget = true)
 		{
 			if(FinalTarget == Vector2.zero)
 			{
-				return;
+				return false;
 			}
 			_timeSinceLastPathUpdate += Time.fixedDeltaTime;
-			var atTarget = (Vector2.Distance(transform.position, FinalTarget) < 1f) && checkTarget;
+			var atTarget = (Vector2.Distance(transform.position, FinalTarget) < 5f) && checkTarget;
 			if(_timeSinceLastPathUpdate > _timeBetweenPathUpdates)
 			{
 				Path = PathFindingService.GetPath(transform.position, FinalTarget);
@@ -191,6 +183,7 @@ namespace Characters.Enemy.Centipede
 				NextWaypoint = PathFindingService.GetNextPosition(Path, CurrentNodeIndex);
 				CurrentNodeIndex++;
 			}
+			return atTarget;
 		}
 		private bool AtTarget()
 		{
