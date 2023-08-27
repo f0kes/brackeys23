@@ -452,4 +452,4 @@ MonoBehaviour:
   _slowTime: 2
   _slowPercent: 0.6
   _attackRange: 1
-  _minLightAggroIntensity: 0.2
+  _minLightAggroIntensity: 0.1

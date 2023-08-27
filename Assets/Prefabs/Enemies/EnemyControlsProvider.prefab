@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574b77f5452248dd9ea0fbcb308eb004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _aggroRange: 0
+  _minAggroLightIntensity: 0.1
+  _timeBetweenPathUpdates: 2
